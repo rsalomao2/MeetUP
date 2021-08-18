@@ -25,6 +25,7 @@ import com.google.firebase.ktx.Firebase
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 	//    private lateinit var callbackManager: CallbackManager
+
 	private val callbackManager = CallbackManager.Factory.create()
 
 	private lateinit var binding: FragmentLoginBinding
