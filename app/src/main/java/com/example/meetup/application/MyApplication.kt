@@ -1,4 +1,4 @@
-package com.example.meetup
+package com.example.meetup.application
 
 import android.app.Application
 import com.facebook.FacebookSdk

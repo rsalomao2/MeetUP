@@ -7,56 +7,46 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.fixingfirebase.fragments.LoginFragment"
+        android:name="com.example.meetup.fragments.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
-<!--        <action-->
-<!--            android:id="@+id/action_loginFragment_to_homeFragment"-->
-<!--            app:destination="@id/homeFragment" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_loginFragment_to_recyclerViewFragment"-->
-<!--            app:destination="@id/recyclerViewFragment" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_loginFragment_to_registrationFragment"-->
-<!--            app:destination="@id/registrationFragment"-->
-<!--            app:popUpTo="@id/loginFragment"-->
-<!--            app:popUpToInclusive="true" />-->
+        <action
+            android:id="@+id/action_loginFragment_to_recyclerViewFragment"
+            app:destination="@id/recyclerViewFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
-<!--    <fragment-->
-<!--        android:id="@+id/homeFragment"-->
-<!--        android:name="com.example.fixingfirebase.fragments.HomeFragment"-->
-<!--        android:label="fragment_home"-->
-<!--        tools:layout="@layout/fragment_home" >-->
-<!--        <argument-->
-<!--            android:name="email"-->
-<!--            app:argType="string" />-->
-<!--    </fragment>-->
-<!--    <fragment-->
-<!--        android:id="@+id/recyclerViewFragment"-->
-<!--        android:name="com.example.fixingfirebase.fragments.RecyclerViewFragment"-->
-<!--        android:label="fragment_recycler_view"-->
-<!--        tools:layout="@layout/fragment_recyclerview" >-->
-<!--        <action-->
-<!--            android:id="@+id/action_recyclerViewFragment_to_usersDetailFragment"-->
-<!--            app:destination="@id/usersDetailFragment" />-->
-<!--    </fragment>-->
-<!--    <fragment-->
-<!--        android:id="@+id/usersDetailFragment"-->
-<!--        android:name="com.example.fixingfirebase.fragments.UsersDetailFragment"-->
-<!--        android:label="UsersDetailFragment" >-->
-<!--        <argument-->
-<!--            android:name="userObject"-->
-<!--            app:argType="com.example.fixingfirebase.model.UserComplete" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_usersDetailFragment_to_recyclerViewFragment"-->
-<!--            app:destination="@id/recyclerViewFragment" />-->
-<!--    </fragment>-->
-<!--    <fragment-->
-<!--        android:id="@+id/registrationFragment"-->
-<!--        android:name="com.example.fixingfirebase.fragments.RegistrationFragment"-->
-<!--        android:label="RegistrationFragment" >-->
-<!--        <action-->
-<!--            android:id="@+id/action_registrationFragment_to_loginFragment"-->
-<!--            app:destination="@id/loginFragment" />-->
-<!--    </fragment>-->
+    <fragment
+        android:id="@+id/recyclerViewFragment"
+        android:name="com.example.meetup.fragments.RecyclerViewFragment"
+        android:label="RecyclerView"
+        tools:layout="@layout/fragment_recyclerview" >
+        <action
+            android:id="@+id/action_recyclerViewFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.example.meetup.fragments.UserDetailFragment"
+        android:label="Users Detail"
+        tools:layout="@layout/fragment_user_detail">
+        <argument
+            android:name="userObject"
+            app:argType="com.example.meetup.model.UserComplete" />
+        <action
+            android:id="@+id/action_userDetailFragment_to_recyclerViewFragment"
+            app:destination="@id/recyclerViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.example.meetup.fragments.RegistrationFragment"
+        android:label="Sign Up"
+        tools:layout="@layout/fragment_registration">
+        <action
+            android:id="@+id/action_registrationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

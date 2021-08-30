@@ -1,10 +1,5 @@
 <resources>
-    <string name="app_name">Meet Up</string>
-
-    <string name="facebook_app_id">812120776166406</string>
-    <string name="fb_login_protocol_scheme">fb812120776166406</string>
-
-
+    <string name="app_name">Week0</string>
     <string name="contentDescription">app name</string>
     <string name="cs_tech">CS TECH</string>
     <string name="email">Email</string>
@@ -34,10 +29,13 @@
     <string name="myFirstName">CAIO</string>
     <string name="myLastName">BASTOS</string>
     <string name="go_to_recyclerview">Go to RecyclerView</string>
+    <string name="recyclreView">RecyclerView</string>
     <string name="id">ID</string>
     <string name="name">Name</string>
     <string name="timeMessage">Hour: %1s:%2s</string>
     <string name="dateMessage">Date: %1s-%2s-%3s</string>
+    <string name="facebook_app_id">2863671627296193</string>
+    <string name="fb_login_protocol_scheme">fb2863671627296193</string>
     <string name="username">Username</string>
     <string name="users_list">Users List</string>
     <string name="empty">" "</string>
