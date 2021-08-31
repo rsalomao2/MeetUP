@@ -148,7 +148,7 @@ https://docs.microsoft.com/pt-br/xamarin/android/user-interface/controls/card-vi
 
 #Intermediario
 * Arquiteturas de projeto
-    MVVM - Model View ViewModel ******
+    MVVM - Model View ViewModel **
     MVP - Model View Presenter
     MVI - Model View Interface
     Viper
@@ -161,4 +161,10 @@ https://docs.microsoft.com/pt-br/xamarin/android/user-interface/controls/card-vi
 
 
 
-
+## REVIEW
+1. Jogar campo de email e senha para outra tela, quando clicar no botao email
+2. Quando o app abrir, vamos chmar a classe `SplashFragment` e nela vai conter o codigo que decidira qual fluxo seguir, se ir pra home ou para login
+3. Implementar botao de logout
+4. Tela login tem que ter 4 botoes, vide Layout
+5. startActivityForResult esta deprecated trocar para a implementacao atual
+6.
