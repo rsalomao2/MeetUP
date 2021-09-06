@@ -62,7 +62,7 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
     }
 
     private fun setupListener() {
-        //setupMap()
+        setupMap()
         setupDateTimePickerBtn()
     }
 
@@ -76,14 +76,14 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         }
     }
 
-    // private fun setupMap() {
-    // val geoObject = args.userObject.address.geo
-    // val action =
-    //    UsersDetailFragmentDirections.actionUsersDetailFragmentToMapsFragment(geoObject)
-    // binding.mapBtn.setOnClickListener {
-    //     findNavController().navigate(action)
-    // }
-    // }
+    private fun setupMap() {
+        val userObject = args.userObject
+        val action =
+            UserDetailFragmentDirections.actionUserDetailFragmentToMapsFragment(userObject)
+        binding.mapBtn.setOnClickListener {
+            findNavController().navigate(action)
+        }
+    }
 
     private fun setupToolbar() {
         binding.collapsingToolbarLayout.title = args.userObject.name

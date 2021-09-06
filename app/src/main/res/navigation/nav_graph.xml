@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_userDetailFragment_to_recyclerViewFragment"
             app:destination="@id/recyclerViewFragment" />
+        <action
+            android:id="@+id/action_userDetailFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -48,5 +51,14 @@
         <action
             android:id="@+id/action_registrationFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.meetup.fragments.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" >
+        <argument
+            android:name="userObject"
+            app:argType="com.example.meetup.model.UserComplete" />
     </fragment>
 </navigation>

@@ -51,4 +51,6 @@
     <string name="date_picker">Date Picker</string>
     <string name="map">Map</string>
     <string name="pick_date_and_time">Pick Date and Time</string>
+    <string name="facebook_login">Facebook Login</string>
+    <string name="login_with_google">Login with Google</string>
 </resources>
