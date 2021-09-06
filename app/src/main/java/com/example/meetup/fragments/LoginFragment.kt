@@ -1,11 +1,7 @@
 package com.example.meetup.fragments
 
-import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -44,6 +40,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         const val GOOGLE_SIGN_IN = 1903
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -55,9 +52,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupListeners()
         mAuth = Firebase.auth
-//        facebookLogin()
         setupListeners()
         setupUi()
     }
@@ -110,7 +105,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)//
         googleSignInClient = GoogleSignIn.getClient(requireContext(), getGSO())
-        binding.googleButton.setOnClickListener { signIn() }
+
     }
 
     private fun signIn() {
@@ -139,109 +134,14 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun setupListeners() {
-        binding.emailEditText.addTextChangedListener(TextFieldValidation(binding.emailEditText))
-        binding.passwordEditText.addTextChangedListener(TextFieldValidation(binding.passwordEditText))
-        binding.signUpTextView.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
-        }
+
         binding.loginButton.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_emailLoginFragment)
+        }
+        binding.loginAnonymously.setOnClickListener {
             signInAnonymously()
-           // if (isValidEmail() and isValidPassword() and emailErrorDialog()) {
-                //findNavController().navigate(R.id.action_loginFragment_to_recyclerViewFragment)
-            //}
         }
-    }
-
-    private fun isValidPassword(): Boolean {
-        val password: String = binding.senhaTextInputLayout.editText?.text.toString()
-        val passwordValidationRegex = "^" + "(?=.*[0-9])" + //at least 1 digit
-                "(?=.*[a-zA-Z])" + //any letter
-                ".{3,8}" +  // between 3 and 8 digits
-                "$"
-
-        return when {
-            password.isEmpty() -> {
-                binding.senhaTextInputLayout.error = getString(R.string.erro_field_cannot_be_empty)
-                false
-            }
-            password.length < 3 -> {
-                binding.senhaTextInputLayout.error = getString(R.string.erro_password_too_short)
-                false
-            }
-            password.length > 8 -> {
-                binding.senhaTextInputLayout.error = getString(R.string.erro_password_too_long)
-                false
-            }
-            !password.matches(passwordValidationRegex.toRegex()) -> {
-                binding.senhaTextInputLayout.error = getString(R.string.erro_password_conditions)
-                false
-            }
-            else -> {
-                binding.senhaTextInputLayout.error = null
-                binding.senhaTextInputLayout.isErrorEnabled = false
-                true
-            }
-        }
-    }
-
-    private fun isValidEmail(): Boolean {
-
-        val email: String = binding.textInputLayoutEmail.editText?.text.toString()
-        val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
-
-        return when {
-            email.isEmpty() -> {
-                binding.textInputLayoutEmail.error = getString(R.string.erro_field_cannot_be_empty)
-                false
-            }
-            !email.matches(emailPattern.toRegex()) -> {
-                binding.textInputLayoutEmail.error = getString(R.string.erro_invalid_email_adress)
-                false
-            }
-            else -> {
-                binding.textInputLayoutEmail.error = null
-                binding.textInputLayoutEmail.isErrorEnabled = false
-                true
-            }
-        }
-    }
-
-    inner class TextFieldValidation(private val view: View) : TextWatcher {
-        override fun afterTextChanged(s: Editable?) {}
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            when (view.id) {
-                R.id.emailEditText -> isValidEmail()
-                R.id.passwordEditText -> isValidPassword()
-            }
-        }
-    }
-
-    private fun emailErrorDialog(): Boolean {
-        val email: String = binding.textInputLayoutEmail.editText?.text.toString()
-        val sharedPreferences =
-            requireActivity().getSharedPreferences(email, Context.MODE_PRIVATE)
-        val savedEmail =
-            sharedPreferences.getString("EMAIL", "")
-
-        return when {
-            email != savedEmail -> {
-                val emailErrorDialog = AlertDialog.Builder(context)
-                    .setTitle("Unregistred Email!")
-                    .setMessage("Create an account ?")
-                    .setIcon(R.drawable.ic_error)
-                    .setPositiveButton("Yes") { _, _ ->
-                        findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
-                    }
-                    .setNegativeButton("No") { _, _ ->
-                    }.create()
-                emailErrorDialog.show()
-                false
-            }
-            else -> {
-                true
-            }
-        }
+        binding.googleButton.setOnClickListener { signIn() }
     }
 
     private fun signInAnonymously() {

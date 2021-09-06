@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#4477DF</color>
     <color name="purple">#C7AEF3</color>
+    <color name="green">#8BC34A</color>
+    <color name="fb_blue">#5881DC</color>
+    <color name="google_btn_color">#E9EBEF</color>
 </resources>

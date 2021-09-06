@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.example.meetup.R
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -15,7 +16,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsFragment : Fragment() {
-    private lateinit var args: MapsFragmentArgs
+    private val args: MapsFragmentArgs by navArgs()
     private val callback = OnMapReadyCallback { googleMap ->
         val geo = args.userObject.address.geo
         val lat = geo.lat

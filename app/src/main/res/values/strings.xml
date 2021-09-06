@@ -53,4 +53,9 @@
     <string name="pick_date_and_time">Pick Date and Time</string>
     <string name="facebook_login">Facebook Login</string>
     <string name="login_with_google">Login with Google</string>
+    <string name="meetup">MeetUp</string>
+    <string name="or">Or</string>
+    <string name="login_anonymously">Login Anonymously</string>
+    <string name="create_new_account">Create new account</string>
+    <string name="signin">SignIn</string>
 </resources>
