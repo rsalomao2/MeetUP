@@ -61,14 +61,22 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/round_btn_facebook"
                 android:gravity="center"
-                app:circularflow_defaultRadius="8dp"
                 android:orientation="horizontal"
+                app:circularflow_defaultRadius="8dp"
                 app:layout_constraintBottom_toTopOf="@id/login_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/google_btn">
 
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/fb_login_button"
+                    style="@style/ButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_centerInParent="true" />
+
                 <RelativeLayout
+                    android:id="@+id/fb_login_button_fake"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center">
@@ -91,13 +99,7 @@
                         android:textStyle="bold" />
                 </RelativeLayout>
 
-                <com.facebook.login.widget.LoginButton
-                    android:id="@+id/fb_login_button"
-                    style="@style/ButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:visibility="invisible" />
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -105,8 +107,8 @@
                 style="@style/ButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:background="@drawable/round_btn_google"
+                android:gravity="center_vertical"
                 app:circularflow_defaultRadius="8dp"
                 app:layout_constraintBottom_toTopOf="@id/fb_btn"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -114,8 +116,13 @@
                 app:layout_constraintTop_toBottomOf="@id/app_name_textView"
                 app:layout_constraintVertical_chainStyle="packed">
 
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/googleButton"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp" />
+
                 <RelativeLayout
-                    android:id="@+id/google_sign"
+                    android:id="@+id/google_button_fake"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical">
@@ -138,12 +145,7 @@
 
                 </RelativeLayout>
 
-                <com.google.android.gms.common.SignInButton
-                    android:id="@+id/googleButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/login_button_size"
-                    android:background="#1575D5"
-                    android:visibility="invisible" />
+
             </RelativeLayout>
 
             <TextView
@@ -155,8 +157,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/login_button"
-                />
+                app:layout_constraintTop_toBottomOf="@id/login_button" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/login_anonymously"
@@ -164,14 +165,13 @@
                 android:layout_width="0dp"
                 android:layout_height="44dp"
                 android:background="@drawable/round_btn_anonymously"
-                android:textAllCaps="false"
                 android:text="@string/login_anonymously"
+                android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toTopOf="@+id/forgot_your_password_textView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/or_tv" />
-
 
 
             <TextView

@@ -47,10 +47,10 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
         )
         binding.registrationPhoneNumberEditText.addTextChangedListener(TextFieldValidation(binding.registrationPhoneNumberEditText))
         binding.registerButton.setOnClickListener {
-//            if (isValidEmail() and isValidPassword() and isValidPhoneNumber() and isValidCpf() and isValidFirstName() and isValidLastName()) {
-//                saveData()
+            if (isValidEmail() and isValidPassword() and isValidPhoneNumber() and isValidCpf() and isValidFirstName() and isValidLastName()) {
+                saveData()
                 findNavController().popBackStack()
-        //    }
+            }
         }
     }
 

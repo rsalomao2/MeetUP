@@ -17,6 +17,7 @@ import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
+import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -54,25 +55,37 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         super.onViewCreated(view, savedInstanceState)
         mAuth = Firebase.auth
         setupListeners()
-        setupUi()
+        facebookLogin()
     }
 
-    private fun setupUi() {
-        binding.fbLoginButton.setPermissions("email", "public_profile")
+    private fun facebookLogin(){
+        val btnLoginFacebook = binding.fbLoginButton
+        val btnLoginFacebookFake = binding.fbLoginButtonFake
+        btnLoginFacebookFake.setOnClickListener {
+            btnLoginFacebook.callOnClick()
+        }
+        btnLoginFacebook.setOnClickListener {
+            requireContext().showToast("Facebook Click teste")
 
-        binding.fbLoginButton.registerCallback(
-            callbackManager,
-            object : FacebookCallback<LoginResult> {
-                override fun onCancel() = Unit
-                override fun onSuccess(loginResult: LoginResult) {
-                    Log.d("###", "facebook:onSuccess:$loginResult")
-                    handleFacebookAccessToken(loginResult.accessToken)
-                }
+            // Login
+            LoginManager.getInstance()
+                .logInWithReadPermissions(this, listOf("public_profile", "email"))
+            LoginManager.getInstance().registerCallback(callbackManager,
+                object : FacebookCallback<LoginResult> {
+                    override fun onSuccess(loginResult: LoginResult) {
+                        findNavController().navigate(R.id.action_loginFragment_to_recyclerViewFragment)
+                        Log.d("MainActivity", "Facebook token: " + loginResult.accessToken.token)
+                    }
 
-                override fun onError(error: FacebookException) {
-                    Log.d("###", "facebook:onError", error)
-                }
-            })
+                    override fun onCancel() {
+                        Log.d("MainActivity", "Facebook onCancel.")
+                    }
+
+                    override fun onError(error: FacebookException) {
+                        Log.d("MainActivity", "Facebook onError.")
+                    }
+                })
+        }
     }
 
     override fun onStart() {
@@ -142,6 +155,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             signInAnonymously()
         }
         binding.googleButton.setOnClickListener { signIn() }
+        binding.googleButtonFake.setOnClickListener {
+            binding.googleButton.callOnClick()
+        }
     }
 
     private fun signInAnonymously() {
