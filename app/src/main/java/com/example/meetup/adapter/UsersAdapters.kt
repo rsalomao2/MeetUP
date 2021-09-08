@@ -43,6 +43,7 @@ class UsersAdapters(
         holder.email.text = emailText
         Glide.with(holder.itemView.context)
             .load(userListItem.imageUrl)
+            .placeholder(R.drawable.ic_launcher_background)
             .into(holder.image)
         holder.itemView.setOnClickListener {
             onClickItem(userListItem)
