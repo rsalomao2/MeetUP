@@ -73,7 +73,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="16dp"
                         android:layout_marginEnd="@dimen/uderDetailMargin"
                         android:layout_marginBottom="8dp" />
 
@@ -166,7 +166,8 @@
                             android:layout_marginStart="@dimen/uderDetailMargin"
                             android:layout_marginEnd="@dimen/uderDetailMargin"
                             android:layout_weight="1"
-                            android:text="@string/pick_date_and_time" />
+                            android:text="@string/pick_date_and_time"
+                            android:layout_marginBottom="8dp"/>
 
                         <Button
                             android:id="@+id/mapBtn"
@@ -184,6 +185,7 @@
                         android:id="@+id/datePickerText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
                         android:layout_marginStart="@dimen/uderDetailMargin"
                         android:layout_marginEnd="@dimen/uderDetailMargin" />
 
@@ -193,7 +195,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/uderDetailMargin"
                         android:layout_marginEnd="@dimen/uderDetailMargin"
-                        android:layout_marginBottom="8dp" />
+                        android:layout_marginBottom="16dp" />
 
                 </LinearLayout>
 
