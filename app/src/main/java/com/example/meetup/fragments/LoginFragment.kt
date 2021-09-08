@@ -7,13 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.meetup.R
 import com.example.meetup.databinding.FragmentLoginBinding
 import com.example.meetup.extensions.showToast
-import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -23,6 +23,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
@@ -55,37 +56,23 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         super.onViewCreated(view, savedInstanceState)
         mAuth = Firebase.auth
         setupListeners()
-        facebookLogin()
-        googleLogin()
     }
 
-    private fun googleLogin() {
-        val googleFakeBtn = binding.googleButtonFake
-        val googleBtn = binding.googleBtn
-
-        googleBtn.setOnClickListener { signIn() }
-        googleFakeBtn.setOnClickListener {
-            googleBtn.callOnClick()
-        }
-
-    }
-
-    private fun facebookLogin(){
+    private fun setupLoginFacebook() {
         val btnLoginFacebook = binding.fbLoginButton
         val btnLoginFacebookFake = binding.fbLoginButtonFake
         btnLoginFacebookFake.setOnClickListener {
             btnLoginFacebook.callOnClick()
         }
         btnLoginFacebook.setOnClickListener {
-            requireContext().showToast("Facebook Click teste")
-
-            // Login
             LoginManager.getInstance()
                 .logInWithReadPermissions(this, listOf("public_profile", "email"))
             LoginManager.getInstance().registerCallback(callbackManager,
                 object : FacebookCallback<LoginResult> {
                     override fun onSuccess(loginResult: LoginResult) {
-                        findNavController().navigate(R.id.action_loginFragment_to_recyclerViewFragment)
+                        val token = loginResult.accessToken.token
+                        val credential = FacebookAuthProvider.getCredential(token)
+                        signInOnFirebase(credential)
                         Log.d("MainActivity", "Facebook token: " + loginResult.accessToken.token)
                     }
 
@@ -100,27 +87,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        val currentUser = mAuth.currentUser
-        if (currentUser != null) {
-            requireContext().showToast("FUNCIONA krai temos um user")
-        } else
-            requireContext().showToast("FUNCIONA krai NAO temos um user")
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
-        // Pass the activity result back to the Facebook SDK
         callbackManager.onActivityResult(requestCode, resultCode, data)
-
-        //google
         if (requestCode == GOOGLE_SIGN_IN) {
-            findNavController().navigate(R.id.action_loginFragment_to_recyclerViewFragment)
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)!!
-                firebaseAuthWithGoogle(account.idToken!!)
+                val idToken = account.idToken
+                val credential = GoogleAuthProvider.getCredential(idToken, null)
+                signInOnFirebase(credential)
             } catch (e: ApiException) {
                 Toast.makeText(context, "onActivityResult Exception", Toast.LENGTH_SHORT).show()
                 Log.d("###", e.message.toString())
@@ -135,22 +110,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     }
 
-    private fun signIn() {
-        requireContext().showToast("Google Click Teste")
+    private fun showGoogleSignInDialog() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, GOOGLE_SIGN_IN)
-    }
-
-    private fun firebaseAuthWithGoogle(idToken: String) {
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-        mAuth.signInWithCredential(credential)
-            .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, "AuthGoogleFail", Toast.LENGTH_SHORT).show()
-                }
-            }
     }
 
     private fun getGSO(): GoogleSignInOptions {
@@ -162,47 +124,53 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun setupListeners() {
+        setupLoginFacebook()
+        setupLoginEmail()
+        setupLoginAnounymously()
+        setupLoginGoogleButton()
+    }
 
-        binding.loginButton.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_emailLoginFragment)
-        }
+    private fun setupLoginAnounymously() {
         binding.loginAnonymously.setOnClickListener {
             signInAnonymously()
         }
-        binding.googleButton.setOnClickListener { signIn() }
-        binding.googleButtonFake.setOnClickListener {
-            binding.googleButton.callOnClick()
+    }
+
+    private fun setupLoginEmail() {
+        binding.loginEmailBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_emailLoginFragment)
         }
+    }
+
+    private fun setupLoginGoogleButton() {
+        binding.googleButtonFake.setOnClickListener {
+            showGoogleSignInDialog()
+        }
+    }
+
+    private fun navigateToHome() {
+        findNavController().navigate(R.id.action_loginFragment_to_recyclerViewFragment)
     }
 
     private fun signInAnonymously() {
         mAuth.signInAnonymously()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    findNavController().navigate(R.id.action_loginFragment_to_recyclerViewFragment)
-                    requireContext().showToast("Sucesso: ${mAuth.currentUser}")
+                    navigateToHome()
                 } else {
-                    requireContext().showToast("Error: Krai nao deu")
                     Log.d("###", task.exception?.localizedMessage ?: "Error ao login anonnymously")
                 }
             }
     }
 
-    private fun handleFacebookAccessToken(token: AccessToken) {
-        Log.d("###", "handleFacebookAccessToken:$token")
-
-        val credential = FacebookAuthProvider.getCredential(token.token)
+    private fun signInOnFirebase(credential: AuthCredential) {
         mAuth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d("###", "signInWithCredential:success")
-                    val user = mAuth.currentUser
-                    requireContext().showToast("LOGADO: ${user?.displayName}")
+                    navigateToHome()
                 } else {
-                    // If sign in fails, display a message to the user.
-                    requireContext().showToast("Authentication failed.: task.exception")
                     Log.d("###", "signInWithCredential:failure", task.exception)
+                    requireContext().showToast("Login Failune\n${task.exception?.message.toString()}")
                 }
             }
     }

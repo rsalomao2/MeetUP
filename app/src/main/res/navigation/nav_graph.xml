@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -35,9 +35,6 @@
             android:name="userObject"
             app:argType="com.example.meetup.model.UserComplete" />
         <action
-            android:id="@+id/action_userDetailFragment_to_recyclerViewFragment"
-            app:destination="@id/recyclerViewFragment" />
-        <action
             android:id="@+id/action_userDetailFragment_to_mapsFragment"
             app:destination="@id/mapsFragment" />
     </fragment>
@@ -66,5 +63,17 @@
         <action
             android:id="@+id/action_emailLoginFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.meetup.fragments.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_recyclerViewFragment"
+            app:destination="@id/recyclerViewFragment" />
     </fragment>
 </navigation>
