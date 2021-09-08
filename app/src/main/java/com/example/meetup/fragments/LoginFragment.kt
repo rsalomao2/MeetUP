@@ -56,6 +56,18 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         mAuth = Firebase.auth
         setupListeners()
         facebookLogin()
+        googleLogin()
+    }
+
+    private fun googleLogin() {
+        val googleFakeBtn = binding.googleButtonFake
+        val googleBtn = binding.googleBtn
+
+        googleBtn.setOnClickListener { signIn() }
+        googleFakeBtn.setOnClickListener {
+            googleBtn.callOnClick()
+        }
+
     }
 
     private fun facebookLogin(){
@@ -111,6 +123,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 Toast.makeText(context, "onActivityResult Exception", Toast.LENGTH_SHORT).show()
+                Log.d("###", e.message.toString())
+                Log.d("###", e.toString())
             }
         }
     }
@@ -122,6 +136,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun signIn() {
+        requireContext().showToast("Google Click Teste")
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, GOOGLE_SIGN_IN)
     }
