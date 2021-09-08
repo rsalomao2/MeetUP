@@ -7,6 +7,7 @@
         android:id="@+id/userDetailCordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -14,14 +15,15 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:contentScrim="?attr/colorPrimary"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                android:fitsSystemWindows="true"
+                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
                 <ImageView
                     android:id="@+id/expandedImage"
@@ -35,11 +37,10 @@
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/userDetailToolbar"
                     android:layout_width="match_parent"
-                    app:titleTextColor="@color/white"
-                    app:title="@string/userDetail"
-                    app:layout_scrollFlags="scroll"
                     android:layout_height="?android:attr/actionBarSize"
-                    app:layout_collapseMode="pin" />
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    app:title="@string/userDetail"
+                    app:titleTextColor="@color/white" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
@@ -62,138 +63,137 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/userDetailCordinatorLayout">
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    >
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
                         android:id="@+id/userDetailUserNameTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/uderDetailMargin"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="@dimen/uderDetailMargin"
                         android:layout_marginBottom="8dp" />
 
                     <TextView
-                        android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
                         android:id="@+id/userDetailEmailTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/uderDetailMargin"
+                        android:layout_marginEnd="@dimen/uderDetailMargin"
                         android:layout_marginBottom="8dp" />
 
                     <TextView
-                        android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
                         android:id="@+id/userDetailIdTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/uderDetailMargin"
+                        android:layout_marginEnd="@dimen/uderDetailMargin"
                         android:layout_marginBottom="8dp" />
 
                     <TextView
-                        android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
                         android:id="@+id/userDetailPhoneNumberTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/uderDetailMargin"
+                        android:layout_marginEnd="@dimen/uderDetailMargin"
                         android:layout_marginBottom="8dp" />
 
                     <TextView
-                        android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
                         android:id="@+id/userDetailWebsiteTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/uderDetailMargin"
+                        android:layout_marginEnd="@dimen/uderDetailMargin"
                         android:layout_marginBottom="8dp" />
 
                     <TextView
-                        android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
                         android:id="@+id/userDetailAddressTitleTextView"
                         android:layout_width="match_parent"
-                        android:textStyle="bold"
-                        tools:text="Placeholder"
-                        android:text="@string/address"
-                        android:textAlignment="center"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp" />
-
-                    <TextView
                         android:layout_marginStart="@dimen/uderDetailMargin"
                         android:layout_marginEnd="@dimen/uderDetailMargin"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/address"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        tools:text="Placeholder" />
+
+                    <TextView
                         android:id="@+id/userDetailStreetTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/uderDetailMargin"
+                        android:layout_marginEnd="@dimen/uderDetailMargin"
                         android:layout_marginBottom="8dp" />
 
                     <TextView
-                        android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
                         android:id="@+id/userDetailSuiteTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/uderDetailMargin"
+                        android:layout_marginEnd="@dimen/uderDetailMargin"
                         android:layout_marginBottom="8dp" />
 
                     <TextView
-                        android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
                         android:id="@+id/userDetailCityTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/uderDetailMargin"
+                        android:layout_marginEnd="@dimen/uderDetailMargin"
                         android:layout_marginBottom="8dp" />
 
                     <TextView
-                        android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
                         android:id="@+id/userDetailZipCodeTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/uderDetailMargin"
+                        android:layout_marginEnd="@dimen/uderDetailMargin"
                         android:layout_marginBottom="8dp" />
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
                         <Button
-                            android:layout_marginStart="@dimen/uderDetailMargin"
-                            android:layout_marginEnd="@dimen/uderDetailMargin"
                             android:id="@+id/datePickerBtn"
+                            style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/pick_date_and_time"
-                            android:layout_weight="1"
-                            style="?android:attr/buttonBarButtonStyle" />
-
-                        <Button
                             android:layout_marginStart="@dimen/uderDetailMargin"
                             android:layout_marginEnd="@dimen/uderDetailMargin"
+                            android:layout_weight="1"
+                            android:text="@string/pick_date_and_time" />
+
+                        <Button
                             android:id="@+id/mapBtn"
+                            style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/map"
+                            android:layout_marginStart="@dimen/uderDetailMargin"
+                            android:layout_marginEnd="@dimen/uderDetailMargin"
                             android:layout_weight="1"
-                            style="?android:attr/buttonBarButtonStyle" />
+                            android:text="@string/map" />
 
                     </LinearLayout>
 
                     <TextView
-                        android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
-                        android:layout_width="match_parent"
                         android:id="@+id/datePickerText"
-                        android:layout_height="wrap_content"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/uderDetailMargin"
+                        android:layout_marginEnd="@dimen/uderDetailMargin" />
 
                     <TextView
+                        android:id="@+id/timePickerText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/uderDetailMargin"
                         android:layout_marginEnd="@dimen/uderDetailMargin"
-                        android:layout_width="match_parent"
-                        android:id="@+id/timePickerText"
-                        android:layout_height="wrap_content"/>
+                        android:layout_marginBottom="8dp" />
 
                 </LinearLayout>
 
