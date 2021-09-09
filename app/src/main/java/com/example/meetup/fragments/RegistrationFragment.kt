@@ -157,7 +157,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
         val senha = binding.registrationPasswordTextInputLayout.editText?.text.toString()
         val passwordVal = "^" + "(?=.*[0-9])" +         //at least 1 digit
                 "(?=.*[a-zA-Z])" +  //any letter
-                ".{3,8}" +  // between 3 and 8 digits
+                ".{6,8}" +  // between 3 and 8 digits
                 "$"
 
         return when {
@@ -213,7 +213,6 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("###", "createUserWithEmail:success")
-                    val user = mAuth.currentUser
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("###", "createUserWithEmail:failure", task.exception)

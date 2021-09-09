@@ -17,7 +17,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="RecyclerView">RecyclerView</string>
     <string name="erro_field_cannot_be_empty">Field cannot be empty</string>
-    <string name="erro_password_too_short">Password is too short. Minimum 3 digits</string>
+    <string name="erro_password_too_short">Password is too short. Minimum 6 digits</string>
     <string name="erro_password_too_long">Password is too long. Maximum 8 digits</string>
     <string name="erro_password_conditions">Password must have at least one digit(0–9) and one letter(a-Z)</string>
     <string name="erro_invalid_email_adress">Invalid email address</string>
@@ -60,4 +60,5 @@
     <string name="signin">SignIn</string>
     <string name="google_sign">Google Sign</string>
     <string name="login_with_email">Login with Email</string>
+    <string name="logout">Logout</string>
 </resources>

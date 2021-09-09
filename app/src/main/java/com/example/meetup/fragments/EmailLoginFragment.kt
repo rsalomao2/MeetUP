@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,15 +14,21 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.example.meetup.R
 import com.example.meetup.databinding.FragmentEmailLoginBinding
+import com.example.meetup.extensions.showToast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class EmailLoginFragment : Fragment() {
     private lateinit var binding: FragmentEmailLoginBinding
+    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_email_login, container, false)
+        mAuth = Firebase.auth
         return binding.root
     }
 
@@ -37,17 +44,34 @@ class EmailLoginFragment : Fragment() {
             findNavController().navigate(R.id.action_emailLoginFragment_to_registrationFragment)
         }
         binding.signinBtn.setOnClickListener {
-            if (isValidEmail() and isValidPassword() and emailErrorDialog()) {
-                findNavController().navigate(R.id.action_emailLoginFragment_to_recyclerViewFragment)
-            }
+            signInWithFirebase()
+//            if (isValidEmail() and isValidPassword() and emailErrorDialog()) {
+//                findNavController().navigate(R.id.action_emailLoginFragment_to_recyclerViewFragment)
+//            }
         }
+    }
+
+    private fun signInWithFirebase(){
+        val password: String = binding.passwordLoginTextInput.editText?.text.toString()
+        val email: String = binding.emailLoginTextInput.editText?.text.toString()
+        mAuth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    findNavController().graph.startDestination = R.id.recyclerViewFragment
+                    findNavController().navigate(R.id.action_emailLoginFragment_to_recyclerViewFragment)
+                    Log.d("###", "signInWithEmail:success")
+                } else {
+                    requireContext().showToast("Invalid Email or Password")
+                    Log.w("###", "signInWithEmail:failure", task.exception)
+                }
+            }
     }
 
     private fun isValidPassword(): Boolean {
         val password: String = binding.passwordLoginTextInput.editText?.text.toString()
         val passwordValidationRegex = "^" + "(?=.*[0-9])" + //at least 1 digit
                 "(?=.*[a-zA-Z])" + //any letter
-                ".{3,8}" +  // between 3 and 8 digits
+                ".{6,8}" +  // between 6 and 8 digits
                 "$"
 
         return when {
