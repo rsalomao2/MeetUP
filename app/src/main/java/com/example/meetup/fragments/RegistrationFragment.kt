@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +15,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.meetup.R
 import com.example.meetup.databinding.FragmentRegistrationBinding
+import com.example.meetup.extensions.showToast
 import com.example.meetup.util.AutoMask.Companion.mask
 import com.example.meetup.util.CpfValidator
+import com.google.firebase.auth.FirebaseAuth
 
 class RegistrationFragment : Fragment(R.layout.fragment_registration) {
     private lateinit var binding: FragmentRegistrationBinding
+    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +31,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_registration, container, false
         )
+        mAuth = FirebaseAuth.getInstance()
         setupToolbar()
         setupListeners()
         return binding.root
@@ -200,7 +205,25 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
         }
     }
 
+    private fun createFirebaseUser() {
+        val password = binding.registrationPasswordTextInputLayout.editText?.text.toString()
+        val email = binding.registrationEmailTextInputLayout.editText?.text.toString()
+        mAuth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("###", "createUserWithEmail:success")
+                    val user = mAuth.currentUser
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("###", "createUserWithEmail:failure", task.exception)
+
+                }
+            }
+    }
+
     private fun saveData() {
+        createFirebaseUser()
         val firstName = binding.firstNameTextInputLayout.editText?.text.toString()
         val lastName = binding.lastNameTextInputLayout.editText?.text.toString()
         val email = binding.registrationEmailTextInputLayout.editText?.text.toString()
