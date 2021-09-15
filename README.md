@@ -140,6 +140,24 @@ https://docs.microsoft.com/pt-br/xamarin/android/user-interface/controls/card-vi
 - [ ] Adicionar toolbar
 - [ ] Nome da tela na toolbar
 
+- Bugs and Fixes
+- [ ] Login diminuir tamanho de logo
+- [ ] Aumentar margin da imagem dentro dos botoes
+- [ ] Nivelar tamanho dos botoes
+- [ ] Nivelar margem entre botoes
+- [ ] Remover toolbar da tela de login
+- [ ] Remover toolbar duplicada na tela de registrar
+- [ ] Fazer toolbar aparecer em todas as telas menos na de login
+- [ ] Remover menu logout de todas as telas que nao estejam logadas
+- [ ] Ao clicar no texto do bottom da tela de login, SIGN UP, ir para tela de registrar
+- [ ] Quando a toolbar aparecer o titulo deve ser a descricao da tela. Ex: registrar, Login com Email, Lista de Usuarios, Detalhe do usuario, etc
+- [ ] Quando houver toolbar a seta de voltar deve estar branca
+- [ ] Na lista da Home deve mostrar lista de usuarios cadastrados do Firebase e nao mais na API
+- [ ] Ao ir para Tela de lista de usuario, ele nao deve mostrar botao voltar
+- [ ] Ao clicar em voltar com botao do dispositivo ele minimiza o app ao inves de voltar para Home.
+
+
+
 ### Opcoes de estudo
 #Basisco
 * Selectors (Botao com 2 cores, ativo desativo)
@@ -148,7 +166,7 @@ https://docs.microsoft.com/pt-br/xamarin/android/user-interface/controls/card-vi
     
 #Intermediario
 * Arquiteturas de projeto 
-    MVVM - Model View ViewModel ******
+    MVVM - Model View ViewModel **
     MVP - Model View Presenter
     MVI - Model View Interface
     Viper
@@ -158,7 +176,3 @@ https://docs.microsoft.com/pt-br/xamarin/android/user-interface/controls/card-vi
 * Clean Code
 * Fazer um recycleView com tipos de View diferentes. Usando `getItemViewType` 
     Artigo top sobre assunto https://betterprogramming.pub/android-recyclerview-with-kotlin-sealed-classes-6d2985aac3e5
-
-
-             
- 
