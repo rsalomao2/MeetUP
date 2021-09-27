@@ -30,6 +30,14 @@
           }
         },
         {
+          "client_id": "960340143606-ni0o6e444g9te8am47g9c5b8hs5mpf80.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.meetup",
+            "certificate_hash": "0b75a8e35f5f65e8fe600f8f9b06b411aace7354"
+          }
+        },
+        {
           "client_id": "960340143606-oarmelp3get7l61e3idjcv9tcm10bjod.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

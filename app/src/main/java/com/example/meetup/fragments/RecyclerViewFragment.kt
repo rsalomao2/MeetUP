@@ -2,24 +2,20 @@ package com.example.meetup.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.view.*
-import androidx.appcompat.widget.Toolbar
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.meetup.R
 import com.example.meetup.adapter.UsersAdapters
 import com.example.meetup.databinding.FragmentRecyclerviewBinding
-import com.example.meetup.extensions.showToast
 import com.example.meetup.model.User
 import com.example.meetup.model.UserComplete
 import com.example.meetup.model.UserListItem
 import com.example.meetup.service.ApiService
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,13 +40,7 @@ class RecyclerViewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupNetwork()
-       // setupToolbar()
     }
-
-//    private fun setupToolbar() {
-//        val toolbar = binding.recyclewViewToolBar
-//        toolbar.setupWithNavController(findNavController())
-//    }
 
     private fun setupNetwork() {
         val api = Retrofit.Builder()
@@ -69,7 +59,6 @@ class RecyclerViewFragment : Fragment() {
                 showData(users)
                 hideLoading()
             }
-
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
                 connectionFailureDialog()
             }

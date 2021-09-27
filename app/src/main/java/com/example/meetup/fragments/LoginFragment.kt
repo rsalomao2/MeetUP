@@ -3,11 +3,8 @@ package com.example.meetup.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -55,6 +52,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mAuth = Firebase.auth
+        mAuth.signOut()
         setupListeners()
     }
 
@@ -116,7 +114,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun getGSO(): GoogleSignInOptions {
-        val clientId = "338665691016-ocoutm0dpm28mbkjhpv1v382c8beohql.apps.googleusercontent.com"
+        val clientId = "169900779180-t22ieegpib8g65i7cu00sk52sfmga9ui.apps.googleusercontent.com"
         return GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(clientId)
             .requestEmail()
@@ -152,10 +150,18 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         findNavController().navigate(R.id.action_loginFragment_to_recyclerViewFragment)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        Log.d("###", "FUNCIONA KRO MENU")
+        menu.findItem(R.id.menu_logout).setVisible(false)
+        Log.d("###", "FUNCIONA KRO MENU")
+    }
+
     private fun signInAnonymously() {
         mAuth.signInAnonymously()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    findNavController().graph.startDestination = R.id.recyclerViewFragment
                     navigateToHome()
                 } else {
                     Log.d("###", task.exception?.localizedMessage ?: "Error ao login anonnymously")

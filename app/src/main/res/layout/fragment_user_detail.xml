@@ -22,7 +22,6 @@
                 android:layout_height="wrap_content"
                 app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleGravity="bottom"
-                app:title="@string/userDetail"
                 app:expandedTitleMarginEnd="64dp"
                 app:expandedTitleMarginStart="48dp"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
@@ -38,8 +37,10 @@
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/userDetailToolbar"
+                    app:menu="@menu/main_menu"
                     android:layout_width="match_parent"
-                    app:title="@string/userDetail"
+                    app:navigationIcon="@drawable/ic_arrow_back"
+                    app:tint="@color/white"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin" />
 

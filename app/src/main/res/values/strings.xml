@@ -1,10 +1,9 @@
 <resources>
-    <string name="app_name">Week0</string>
+    <string name="app_name">Meet Up</string>
     <string name="contentDescription">app name</string>
     <string name="cs_tech">CS TECH</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="login">Login</string>
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="sign_up">Sign up</string>
@@ -61,4 +60,7 @@
     <string name="google_sign">Google Sign</string>
     <string name="login_with_email">Login with Email</string>
     <string name="logout">Logout</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="login">Login</string>
+    <string name="maps">Maps</string>
 </resources>

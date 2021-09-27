@@ -15,7 +15,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.meetup.R
 import com.example.meetup.databinding.FragmentRegistrationBinding
-import com.example.meetup.extensions.showToast
 import com.example.meetup.util.AutoMask.Companion.mask
 import com.example.meetup.util.CpfValidator
 import com.google.firebase.auth.FirebaseAuth
@@ -32,7 +31,6 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
             inflater, R.layout.fragment_registration, container, false
         )
         mAuth = FirebaseAuth.getInstance()
-        setupToolbar()
         setupListeners()
         return binding.root
     }
@@ -57,11 +55,6 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
                 findNavController().popBackStack()
             }
         }
-    }
-
-    private fun setupToolbar() {
-        val toolbar = binding.registrationFragmentToolBar
-        toolbar.setupWithNavController(findNavController())
     }
 
     private fun isValidFirstName(): Boolean {
@@ -166,7 +159,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
                     getString(R.string.erro_field_cannot_be_empty)
                 false
             }
-            senha.length < 3 -> {
+            senha.length < 6 -> {
                 binding.registrationPasswordTextInputLayout.error =
                     getString(R.string.erro_password_too_short)
                 false

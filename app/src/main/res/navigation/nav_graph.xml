@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_recyclerViewFragment"
-            app:destination="@id/recyclerViewFragment" />
+            app:destination="@id/recyclerViewFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_loginFragment_to_emailLoginFragment"
             app:destination="@id/emailLoginFragment" />
@@ -46,7 +48,7 @@
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.example.meetup.fragments.MapsFragment"
-        android:label="fragment_maps"
+        android:label="@string/maps"
         tools:layout="@layout/fragment_maps" >
         <argument
             android:name="userObject"
@@ -55,7 +57,7 @@
     <fragment
         android:id="@+id/emailLoginFragment"
         android:name="com.example.meetup.fragments.EmailLoginFragment"
-        android:label="fragment_email_login"
+        android:label="@string/login"
         tools:layout="@layout/fragment_email_login" >
         <action
             android:id="@+id/action_emailLoginFragment_to_recyclerViewFragment"

@@ -1,23 +1,21 @@
 package com.example.meetup.fragments
 
-import android.app.AlertDialog
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.meetup.R
 import com.example.meetup.databinding.FragmentEmailLoginBinding
-import com.example.meetup.extensions.showToast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+
 
 class EmailLoginFragment : Fragment() {
     private lateinit var binding: FragmentEmailLoginBinding
@@ -38,30 +36,29 @@ class EmailLoginFragment : Fragment() {
     }
 
     private fun setupListeners() {
-          binding.emailLoginEditText.addTextChangedListener(TextFieldValidation(binding.emailLoginEditText))
-         binding.passwordLoginEditText.addTextChangedListener(TextFieldValidation(binding.passwordLoginEditText))
+        binding.emailLoginEditText.addTextChangedListener(TextFieldValidation(binding.emailLoginEditText))
+        binding.passwordLoginEditText.addTextChangedListener(TextFieldValidation(binding.passwordLoginEditText))
         binding.createNewAccount.setOnClickListener {
             findNavController().navigate(R.id.action_emailLoginFragment_to_registrationFragment)
         }
         binding.signinBtn.setOnClickListener {
-            signInWithFirebase()
-//            if (isValidEmail() and isValidPassword() and emailErrorDialog()) {
-//                findNavController().navigate(R.id.action_emailLoginFragment_to_recyclerViewFragment)
-//            }
+            if (isValidEmail() and isValidPassword()) {
+                signInWithFirebase()
+            }
         }
     }
 
-    private fun signInWithFirebase(){
+    private fun signInWithFirebase() {
         val password: String = binding.passwordLoginTextInput.editText?.text.toString()
         val email: String = binding.emailLoginTextInput.editText?.text.toString()
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     findNavController().graph.startDestination = R.id.recyclerViewFragment
-                    findNavController().navigate(R.id.action_emailLoginFragment_to_recyclerViewFragment)
+                    findNavController().navigate(findNavController().graph.startDestination)
+                  // findNavController().navigate(R.id.action_emailLoginFragment_to_recyclerViewFragment)
                     Log.d("###", "signInWithEmail:success")
                 } else {
-                    requireContext().showToast("Invalid Email or Password")
                     Log.w("###", "signInWithEmail:failure", task.exception)
                 }
             }
@@ -76,7 +73,8 @@ class EmailLoginFragment : Fragment() {
 
         return when {
             password.isEmpty() -> {
-                binding.passwordLoginTextInput.error = getString(R.string.erro_field_cannot_be_empty)
+                binding.passwordLoginTextInput.error =
+                    getString(R.string.erro_field_cannot_be_empty)
                 false
             }
             password.length < 3 -> {
@@ -132,31 +130,31 @@ class EmailLoginFragment : Fragment() {
         }
     }
 
-    private fun emailErrorDialog(): Boolean {
-        val email: String = binding.emailLoginTextInput.editText?.text.toString()
-        val sharedPreferences =
-            requireActivity().getSharedPreferences(email, Context.MODE_PRIVATE)
-        val savedEmail =
-            sharedPreferences.getString("EMAIL", "")
-
-        return when {
-            email != savedEmail -> {
-                val emailErrorDialog = AlertDialog.Builder(context)
-                    .setTitle("Unregistred Email!")
-                    .setMessage("Create an account ?")
-                    .setIcon(R.drawable.ic_error)
-                    .setPositiveButton("Yes") { _, _ ->
-                        findNavController().navigate(R.id.action_emailLoginFragment_to_registrationFragment)
-                    }
-                    .setNegativeButton("No") { _, _ ->
-                    }.create()
-                emailErrorDialog.show()
-                false
-            }
-            else -> {
-                true
-            }
-        }
-    }
+//    private fun emailErrorDialog(): Boolean {
+//        val email: String = binding.emailLoginTextInput.editText?.text.toString()
+//        val sharedPreferences =
+//            requireActivity().getSharedPreferences(email, Context.MODE_PRIVATE)
+//        val savedEmail =
+//            sharedPreferences.getString("EMAIL", "")
+//
+//        return when {
+//            email != savedEmail -> {
+//                val emailErrorDialog = AlertDialog.Builder(context)
+//                    .setTitle("Unregistred Email!")
+//                    .setMessage("Create an account ?")
+//                    .setIcon(R.drawable.ic_error)
+//                    .setPositiveButton("Yes") { _, _ ->
+//                        findNavController().navigate(R.id.action_emailLoginFragment_to_registrationFragment)
+//                    }
+//                    .setNegativeButton("No") { _, _ ->
+//                    }.create()
+//                emailErrorDialog.show()
+//                false
+//            }
+//            else -> {
+//                true
+//            }
+//        }
+//    }
 
 }

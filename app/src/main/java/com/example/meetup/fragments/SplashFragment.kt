@@ -20,11 +20,11 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         mAuth = Firebase.auth
+        checkUser()
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
 
-    override fun onStart() {
-        super.onStart()
+    private fun checkUser() {
         val currentUser = mAuth.currentUser
         Log.d("###", "$currentUser")
         if (currentUser == null) {

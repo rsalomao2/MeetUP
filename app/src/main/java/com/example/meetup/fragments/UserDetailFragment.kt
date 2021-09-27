@@ -2,26 +2,33 @@ package com.example.meetup.fragments
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.widget.DatePicker
 import android.widget.TimePicker
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.example.meetup.R
 import com.example.meetup.databinding.FragmentUserDetailBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
     TimePickerDialog.OnTimeSetListener {
 
     private lateinit var binding: FragmentUserDetailBinding
+    private lateinit var navController: NavController
+    private lateinit var mAuth: FirebaseAuth
     private val args: UserDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -31,10 +38,36 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_user_detail, container, false
         )
+        navController = findNavController()
+        mAuth = Firebase.auth
         setupUi()
         setupListener()
         setupToolbar()
+        setHasOptionsMenu(true)
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_logout -> {
+                mAuth.signOut()
+                navController.graph.startDestination = R.id.loginFragment
+                navController.navigate(R.id.loginFragment)
+            }
+            else -> Log.d("###", "ELSE")
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("###", "$toolbar")
     }
 
 
@@ -81,14 +114,18 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         val action =
             UserDetailFragmentDirections.actionUserDetailFragmentToMapsFragment(userObject)
         binding.mapBtn.setOnClickListener {
-            findNavController().navigate(action)
+            navController.navigate(action)
         }
     }
 
     private fun setupToolbar() {
-        binding.collapsingToolbarLayout.title = args.userObject.name
+        binding.collapsingToolbarLayout.apply {
+            title = args.userObject.name
+            setExpandedTitleColor(Color.WHITE)
+            setCollapsedTitleTextColor(Color.WHITE)
+        }
         binding.userDetailToolbar.apply {
-            setupWithNavController(findNavController())
+            setupWithNavController(navController)
         }
     }
 

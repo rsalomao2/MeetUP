@@ -24,6 +24,7 @@ class MapsFragment : Fragment() {
         val placeToMark = LatLng(lat , lng)
         googleMap.addMarker(MarkerOptions().position(placeToMark).title(args.userObject.name))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(placeToMark))
+        CameraUpdateFactory.zoomTo(15f)
     }
 
     override fun onCreateView(
