@@ -128,6 +128,9 @@ https://docs.microsoft.com/pt-br/xamarin/android/user-interface/controls/card-vi
 - [x] Mostrar todos os dados que temos, assim como ja esta implementado
 - [x] Espacmento do texto nas laterais deve ser de 16/18 dp, mas somente no texto a imagem fica borda a borda
 - [x] No bottom da tela teremos os dois botoes(Texto) Date e Map
+- [ ] Trocar icone logout por camera
+- [ ] Ao clicar no icone da camera na toolbar devemos dar opcao, atraves de um dialog, de tirar foto ou carregar imagem
+- [ ] Colocar botao de adicionar imagem do celular
 - [ ] Aumentar tamanho do collpse toolbar para 40% da tela (veja se da pra fazer isso)
 - [ ] Caso o usuario ja tenha escolhido a data de nascimento, desabilitar o botão, porém continua mostrar (cinza claro)
 - [ ] Atualizar o objeto Usuario com os dados de nascimento pegos no Date Picker 
@@ -159,7 +162,7 @@ https://developer.android.com/training/sharing/send
 * Multithread
 * Coroutines
 * SOLID
-* Clean Code
+* Clean Code    
 * Fazer um recycleView com tipos de View diferentes. Usando `getItemViewType` 
     Artigo top sobre assunto https://betterprogramming.pub/android-recyclerview-with-kotlin-sealed-classes-6d2985aac3e5
 
