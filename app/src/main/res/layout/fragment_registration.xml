@@ -14,38 +14,26 @@
             android:layout_height="wrap_content"
             tools:context=".SecondActivity">
 
-            <TextView
-                android:id="@+id/registerScreenTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_marginBottom="32dp"
-                android:text="@string/create_account"
-                android:textAllCaps="false"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/firstNameTextInputLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/firstNameTextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                style="@style/RegistrationTextInputStyle"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toTopOf="@+id/lastNameTextInputLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/registerScreenTitle">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/registrationFirstNameEditText"
                     android:layout_width="match_parent"
+                    style="@style/RegistrationTextInputStyle"
                     android:layout_height="wrap_content"
                     android:hint="@string/first_name"
                     android:singleLine="true" />
@@ -66,6 +54,7 @@
                     android:id="@+id/registrationLastNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/RegistrationTextInputStyle"
                     android:hint="@string/last_name"
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -86,6 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
+                    style="@style/RegistrationTextInputStyle"
                     android:inputType="textEmailAddress"
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -105,6 +95,7 @@
                     android:id="@+id/registrationPhoneNumberEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/RegistrationTextInputStyle"
                     android:hint="@string/phone_number"
                     android:inputType="number"
                     android:singleLine="true" />
@@ -125,6 +116,7 @@
                     android:id="@+id/cpfEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/RegistrationTextInputStyle"
                     android:hint="@string/cpf"
                     android:inputType="number"
                     android:singleLine="true" />
@@ -145,6 +137,7 @@
                     android:id="@+id/registrationPasswordEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/RegistrationTextInputStyle"
                     android:hint="@string/password"
                     android:inputType="textPassword"
                     android:singleLine="true" />

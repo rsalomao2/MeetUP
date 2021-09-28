@@ -89,14 +89,14 @@
     
 ### 13. Melhorar o layout
 - Geral
-- [ ] Trocar cor das setas de retorno para a cor do texto da toolbar ("Branco")
+- [x] Trocar cor das setas de retorno para a cor do texto da toolbar ("Branco")
 - [x] Pesquisar todas telas com toolbar (Usar thema do app)
 
 - Login Home
 - [x] Sem toolbar
 - [x] O logo deve iniciar a 20% do tamanho da tela
-- [ ] Aumentar espaco dos icones dos botoes
-- [ ] Texto SignUp deve enviar para tela de SigUp ao clicar 
+- [x] Aumentar espaco dos icones dos botoes
+- [x] Texto SignUp deve enviar para tela de SigUp ao clicar 
 
 - Login Form
 - [x] Titulo da tela
@@ -107,6 +107,8 @@
 - Signup
 - [ ] Titulo da tela ir para toolbar removendo de dentro do fragment
 - [x] Toolbar esta deslizando junto com os campos
+
+
 - [ ] Testar colcar campos em box
 
 - RecycleView

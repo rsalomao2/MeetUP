@@ -4,6 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="userObject"
+            type="com.example.meetup.model.UserListItem" />
+    </data>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
@@ -17,78 +23,128 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/listRowImage"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:layout_marginBottom="8dp"
-                android:layout_weight="1"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_launcher_background"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/listRowImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_background"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/firstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/listRowImage"
+                    android:background="@color/semiTransparentBackground"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
+
+            </RelativeLayout>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="@+id/firstName"
             app:layout_constraintTop_toBottomOf="@+id/firstName">
 
-            <TextView
-                android:id="@+id/firstName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                style="@style/RowTextStyle"
-                android:text="@string/name"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/userName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed"
-                tools:text="Caio de Souza Bastos " />
+<!--            <TextView-->
+<!--                android:id="@+id/firstName"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                style="@style/RowTextStyle"-->
+<!--                android:text="@string/name"-->
+<!--                android:textSize="16sp"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/userName"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintVertical_chainStyle="packed"-->
+<!--                tools:text="Caio de Souza Bastos " />-->
 
             <TextView
-                android:id="@+id/userName"
+                android:id="@+id/userNameLabel"
                 style="@style/RowTextStyle"
-                android:layout_width="0dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/username"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/idTextView"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/idTextViewLabel"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/firstName" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/idTextView"
-                android:layout_width="0dp"
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="DADADADA"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@id/userNameLabel"
+                app:layout_constraintStart_toEndOf="@id/userNameLabel"
+                app:layout_constraintTop_toTopOf="@id/userNameLabel"/>
+
+            <TextView
+                android:id="@+id/idTextViewLabel"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/id"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 style="@style/RowTextStyle"
-                app:layout_constraintBottom_toTopOf="@+id/email"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/emailLabel"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/userName" />
+                app:layout_constraintTop_toBottomOf="@+id/userNameLabel" />
 
             <TextView
-                android:id="@+id/email"
-                android:layout_width="0dp"
+                android:id="@+id/idTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="DADADADA"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@id/idTextViewLabel"
+                app:layout_constraintStart_toEndOf="@id/idTextViewLabel"
+                app:layout_constraintTop_toTopOf="@id/idTextViewLabel"/>
+
+            <TextView
+                android:id="@+id/emailLabel"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/email"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 style="@style/RowTextStyle"
                 android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/idTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/idTextViewLabel" />
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="DADADADA"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@id/emailLabel"
+                app:layout_constraintStart_toEndOf="@id/emailLabel"
+                app:layout_constraintTop_toTopOf="@id/emailLabel"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         </LinearLayout>
 

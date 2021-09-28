@@ -126,6 +126,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         setupLoginEmail()
         setupLoginAnounymously()
         setupLoginGoogleButton()
+        setupSignUoButton()
+    }
+
+    private fun setupSignUoButton() {
+        binding.signUpTextView.setOnClickListener{
+            findNavController().navigate(R.id.registrationFragment)
+        }
     }
 
     private fun setupLoginAnounymously() {

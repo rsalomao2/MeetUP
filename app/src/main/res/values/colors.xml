@@ -15,4 +15,5 @@
     <color name="green">#8BC34A</color>
     <color name="fb_blue">#5881DC</color>
     <color name="google_btn_color">#E9EBEF</color>
+    <color name="semiTransparentBackground">#40000000</color>
 </resources>

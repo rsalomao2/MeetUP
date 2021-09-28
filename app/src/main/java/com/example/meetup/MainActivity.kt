@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
@@ -23,19 +24,27 @@ class MainActivity : AppCompatActivity() {
     private val fragmentChangelistener =
         NavController.OnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.recyclerViewFragment -> {
-                    findNavController(R.id.nav_host_fragment_container).graph.startDestination = R.id.recyclerViewFragment
-                    showToolbar()
-                    showMenuItem()
-                }
-                R.id.userDetailFragment -> hideToolbar()
                 R.id.loginFragment -> hideToolbar()
                 R.id.emailLoginFragment -> {
                     showToolbar()
                     hideMenuItem()
                 }
-                R.id.mapsFragment -> showToolbar()
-                else -> showToolbar()
+                R.id.registrationFragment -> {
+                    showToolbar()
+                    hideMenuItem()
+                }
+                R.id.recyclerViewFragment -> {
+                    findNavController(R.id.nav_host_fragment_container).graph.startDestination =
+                        R.id.recyclerViewFragment
+                    showToolbar()
+                    showMenuItem()
+                }
+                R.id.userDetailFragment -> hideToolbar()
+                R.id.mapsFragment -> {
+                    hideMenuItem()
+                    showToolbar()
+                }
+                else -> Toast.makeText(this, "Else", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -77,7 +86,6 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 
 
     private fun hideToolbar() {

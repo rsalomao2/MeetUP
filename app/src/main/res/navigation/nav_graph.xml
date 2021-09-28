@@ -22,7 +22,7 @@
     <fragment
         android:id="@+id/recyclerViewFragment"
         android:name="com.example.meetup.fragments.RecyclerViewFragment"
-        android:label="RecyclerView"
+        android:label="@string/users"
         tools:layout="@layout/fragment_recyclerview" >
         <action
             android:id="@+id/action_recyclerViewFragment_to_userDetailFragment"
@@ -57,7 +57,7 @@
     <fragment
         android:id="@+id/emailLoginFragment"
         android:name="com.example.meetup.fragments.EmailLoginFragment"
-        android:label="@string/login"
+        android:label="@string/signin"
         tools:layout="@layout/fragment_email_login" >
         <action
             android:id="@+id/action_emailLoginFragment_to_recyclerViewFragment"
