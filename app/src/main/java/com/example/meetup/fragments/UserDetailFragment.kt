@@ -2,6 +2,7 @@ package com.example.meetup.fragments
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -76,7 +77,7 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         val userObject = args.userObject
 
         binding.apply {
-            userDetailZipCodeTextView.text = getString(R.string.zipCodeLabel, addressObject.zipcode)
+            userDetailZipCodeTextView.text = addressObject.zipcode
             userDetailSuiteTextView.text = getString(R.string.suiteLabel, addressObject.suite)
             userDetailCityTextView.text = getString(R.string.cityLabel, addressObject.city)
             userDetailStreetTextView.text = getString(R.string.streetLabel, addressObject.street)
@@ -85,7 +86,6 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
             userDetailEmailTextView.text = userObject.email
             userDetailIdTextView.text = userObject.id
             userDetailPhoneNumberTextView.text = userObject.phone
-            userDetailWebsiteTextView.text = userObject.website
             userDetailWebsiteTextView.text = userObject.website
         }
         val userUrl = userObject.imageUrl
@@ -97,6 +97,21 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
     private fun setupListener() {
         setupMap()
         setupDateTimePickerBtn()
+        setupShareIntent()
+    }
+
+    private fun setupShareIntent() {
+        val userString = args.userObject.toString()
+        binding.shareBtn.setOnClickListener{
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, userString)
+                type = "text/plain"
+            }
+
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
     }
 
     private fun setupDateTimePickerBtn() {

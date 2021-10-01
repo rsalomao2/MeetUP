@@ -49,7 +49,7 @@
     <string name="time_picker">Time Picker</string>
     <string name="date_picker">Date Picker</string>
     <string name="map">Map</string>
-    <string name="pick_date_and_time">Pick Date and Time</string>
+    <string name="pick_date_and_time">Birthday</string>
     <string name="facebook_login">Facebook Login</string>
     <string name="login_with_google">Login with Google</string>
     <string name="meetup">MeetUp</string>
@@ -64,4 +64,5 @@
     <string name="login">Login</string>
     <string name="maps">Map</string>
     <string name="users">Users</string>
+    <string name="share">SHARE</string>
 </resources>
