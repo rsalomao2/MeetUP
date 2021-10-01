@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/userDetailCordinatorLayout"
         android:layout_width="match_parent"
@@ -14,7 +15,8 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar_layout"
@@ -63,151 +65,310 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/userDetailCordinatorLayout">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/detailUsernameLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/username"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/userDetailUserNameTextView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/userDetailUserNameTextView" />
+
+                    <TextView
                         android:id="@+id/userDetailUserNameTextView"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/uderDetailMargin"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
-                        android:layout_marginBottom="8dp" />
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="16dp"
+                        app:layout_constraintBottom_toTopOf="@+id/userDetailEmailTextView"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/detailUsernameLabel"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/detailEmailLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/email"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/userDetailEmailTextView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/userDetailEmailTextView" />
 
                     <TextView
                         android:id="@+id/userDetailEmailTextView"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
-                        android:layout_marginBottom="8dp" />
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="@+id/userDetailUserNameTextView"
+                        app:layout_constraintStart_toEndOf="@id/detailEmailLabel"
+                        app:layout_constraintTop_toBottomOf="@id/userDetailUserNameTextView" />
+
+                    <TextView
+                        android:id="@+id/detailIDlLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/id"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/userDetailIdTextView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/userDetailIdTextView" />
 
                     <TextView
                         android:id="@+id/userDetailIdTextView"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
-                        android:layout_marginBottom="8dp" />
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="@id/userDetailEmailTextView"
+                        app:layout_constraintStart_toEndOf="@+id/detailIDlLabel"
+                        app:layout_constraintTop_toBottomOf="@id/userDetailEmailTextView" />
+
+                    <TextView
+                        android:id="@+id/detailPhonelLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/phoneLabel"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/userDetailPhoneNumberTextView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/userDetailPhoneNumberTextView" />
 
                     <TextView
                         android:id="@+id/userDetailPhoneNumberTextView"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
-                        android:layout_marginBottom="8dp" />
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="@id/userDetailIdTextView"
+                        app:layout_constraintStart_toEndOf="@id/detailPhonelLabel"
+                        app:layout_constraintTop_toBottomOf="@id/userDetailIdTextView" />
+
+                    <TextView
+                        android:id="@+id/detailWebsitelLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/website"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/userDetailWebsiteTextView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/userDetailWebsiteTextView" />
 
                     <TextView
                         android:id="@+id/userDetailWebsiteTextView"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
-                        android:layout_marginBottom="8dp" />
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="@id/userDetailPhoneNumberTextView"
+                        app:layout_constraintStart_toEndOf="@id/detailWebsitelLabel"
+                        app:layout_constraintTop_toBottomOf="@id/userDetailPhoneNumberTextView" />
 
                     <TextView
                         android:id="@+id/userDetailAddressTitleTextView"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
                         android:text="@string/address"
                         android:textAlignment="center"
                         android:textStyle="bold"
-                        tools:text="Placeholder" />
+                        app:layout_constraintEnd_toEndOf="@id/userDetailWebsiteTextView"
+                        app:layout_constraintStart_toStartOf="@+id/detailWebsitelLabel"
+                        app:layout_constraintTop_toBottomOf="@id/userDetailWebsiteTextView" />
+
+                    <TextView
+                        android:id="@+id/detailStreetlLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/streetLabel"
+                        android:textStyle="bold"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintTop_toTopOf="@id/userDetailStreetTextView"
+                        app:layout_constraintBottom_toBottomOf="@id/userDetailStreetTextView"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
                     <TextView
                         android:id="@+id/userDetailStreetTextView"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
-                        android:layout_marginBottom="8dp" />
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="@id/userDetailAddressTitleTextView"
+                        app:layout_constraintStart_toEndOf="@id/detailStreetlLabel"
+                        app:layout_constraintTop_toBottomOf="@id/userDetailAddressTitleTextView" />
+
+                    <TextView
+                        android:id="@+id/detailSuitelLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/suiteLabel"
+                        android:textStyle="bold"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintTop_toTopOf="@id/userDetailSuiteTextView"
+                        app:layout_constraintBottom_toBottomOf="@id/userDetailSuiteTextView"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
                     <TextView
                         android:id="@+id/userDetailSuiteTextView"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
-                        android:layout_marginBottom="8dp" />
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="@id/userDetailStreetTextView"
+                        app:layout_constraintStart_toEndOf="@id/detailSuitelLabel"
+                        app:layout_constraintTop_toBottomOf="@id/userDetailStreetTextView" />
+
+                    <TextView
+                        android:id="@+id/detailCitylLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cityLabel"
+                        android:textStyle="bold"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintTop_toTopOf="@id/userDetailCityTextView"
+                        app:layout_constraintBottom_toBottomOf="@id/userDetailCityTextView"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
                     <TextView
                         android:id="@+id/userDetailCityTextView"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
-                        android:layout_marginBottom="8dp" />
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="@id/userDetailSuiteTextView"
+                        app:layout_constraintStart_toEndOf="@id/detailCitylLabel"
+                        app:layout_constraintTop_toBottomOf="@id/userDetailSuiteTextView" />
+
+                    <TextView
+                        android:id="@+id/detaiZipCodeLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/zipCodeLabel"
+                        android:textStyle="bold"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintTop_toTopOf="@id/userDetailZipCodeTextView"
+                        app:layout_constraintBottom_toBottomOf="@id/userDetailZipCodeTextView"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
                     <TextView
                         android:id="@+id/userDetailZipCodeTextView"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
-                        android:layout_marginBottom="8dp" />
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="@id/userDetailCityTextView"
+                        app:layout_constraintStart_toEndOf="@id/detaiZipCodeLabel"
+                        app:layout_constraintTop_toBottomOf="@id/userDetailCityTextView" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:id="@+id/detailButtonsLinearLayout"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="@id/userDetailZipCodeTextView"
+                        app:layout_constraintStart_toStartOf="@+id/detaiZipCodeLabel"
+                        app:layout_constraintTop_toBottomOf="@id/userDetailZipCodeTextView">
 
                         <Button
                             android:id="@+id/datePickerBtn"
                             style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginBottom="8dp"
                             android:layout_weight="1"
-                            android:text="@string/pick_date_and_time"
-                            android:layout_marginBottom="8dp"/>
+                            android:text="@string/pick_date_and_time" />
 
                         <Button
                             android:id="@+id/shareBtn"
                             style="?android:attr/buttonBarButtonStyle"
-                            android:text="@string/share"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@color/black"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:text="@string/share" />
 
                         <Button
                             android:id="@+id/mapBtn"
                             style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
+                            android:layout_marginEnd="16dp"
                             android:layout_weight="1"
                             android:text="@string/map" />
 
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/datePickerText"
-                        android:layout_width="match_parent"
+                        android:id="@+id/detaildateLabel"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:text="@string/date_of_birth"
+                        android:textStyle="bold"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintTop_toTopOf="@id/datePickerText"
+                        app:layout_constraintBottom_toBottomOf="@id/datePickerText"
+                        app:layout_constraintStart_toStartOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/datePickerText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin" />
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="@id/detailButtonsLinearLayout"
+                        app:layout_constraintStart_toEndOf="@id/detaildateLabel"
+                        app:layout_constraintTop_toBottomOf="@id/detailButtonsLinearLayout" />
+
+                    <TextView
+                        android:id="@+id/detailTimeLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hour_of_birth"
+                        android:textStyle="bold"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintTop_toTopOf="@id/timePickerText"
+                        app:layout_constraintBottom_toBottomOf="@id/timePickerText"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
                     <TextView
                         android:id="@+id/timePickerText"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginEnd="@dimen/uderDetailMargin"
-                        android:layout_marginBottom="16dp" />
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/datePickerText"
+                        app:layout_constraintStart_toEndOf="@id/detailTimeLabel"
+                        app:layout_constraintTop_toBottomOf="@id/datePickerText" />
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 
         </androidx.core.widget.NestedScrollView>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </layout>

@@ -78,9 +78,9 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
         binding.apply {
             userDetailZipCodeTextView.text = addressObject.zipcode
-            userDetailSuiteTextView.text = getString(R.string.suiteLabel, addressObject.suite)
-            userDetailCityTextView.text = getString(R.string.cityLabel, addressObject.city)
-            userDetailStreetTextView.text = getString(R.string.streetLabel, addressObject.street)
+            userDetailSuiteTextView.text = addressObject.suite
+            userDetailCityTextView.text = addressObject.city
+            userDetailStreetTextView.text = addressObject.street
 
             userDetailUserNameTextView.text = userObject.username
             userDetailEmailTextView.text = userObject.email

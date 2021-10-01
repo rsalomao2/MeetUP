@@ -10,6 +10,7 @@
     <string name="create_account">CREATE ACCOUNT</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
+    <string name="phoneLabel">Phone</string>
     <string name="phone_number">Phone Number + DDD</string>
     <string name="cpf">CPF</string>
     <string name="register">Register</string>
@@ -31,18 +32,18 @@
     <string name="recyclreView">RecyclerView</string>
     <string name="id">ID</string>
     <string name="name">Name</string>
-    <string name="timeMessage">Hour: %1s:%2s</string>
-    <string name="dateMessage">Date: %1s-%2s-%3s</string>
+    <string name="timeMessage">%1s:%2s</string>
+    <string name="dateMessage">%1s-%2s-%3s</string>
     <string name="facebook_app_id">2863671627296193</string>
     <string name="fb_login_protocol_scheme">fb2863671627296193</string>
     <string name="username">Username</string>
     <string name="users_list">Users List</string>
     <string name="empty">" "</string>
     <string name="welcomeMessage">"Bem Vindo %1$s %2$s"</string>
-    <string name="streetLabel">"Street: %1s"</string>
-    <string name="cityLabel">"City: %1s"</string>
-    <string name="suiteLabel">"Suite: %1s"</string>
-    <string name="zipCodeLabel">"ZipCode: %1s"</string>
+    <string name="streetLabel">Street</string>
+    <string name="cityLabel">City</string>
+    <string name="suiteLabel">Suite</string>
+    <string name="zipCodeLabel">ZipCode</string>
     <string name="userDetail">User Detail</string>
     <string name="usersList">Users List</string>
     <string name="address">Address</string>
@@ -65,4 +66,7 @@
     <string name="maps">Map</string>
     <string name="users">Users</string>
     <string name="share">SHARE</string>
+    <string name="website">Website</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="hour_of_birth">Hour of Birth</string>
 </resources>

@@ -12,11 +12,11 @@ data class User(
 ) {
     fun convertToUserListItem(): UserListItem {
 
-        val userNameText = "$username"
-        val emailText = "$email"
+        val userNameText = username
+        val emailText = email
         val idText = "$id"
-        val phoneText = "Phone Number: $phone"
-        val websiteText = "Website: $website"
+        val phoneText = phone
+        val websiteText = website
         return UserListItem(
            name, userNameText, emailText, idText, imageUrl, phoneText, websiteText, address
         )
