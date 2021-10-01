@@ -22,6 +22,8 @@
                 android:id="@+id/email_login_textInput"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
                 android:layout_marginTop="32dp"
                 style="Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 >
@@ -31,8 +33,8 @@
                 android:id="@+id/email_login_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#fff"
                 android:hint="@string/email"
+                android:background="@drawable/outlined_box"
                 android:inputType="textEmailAddress"
                 android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -41,6 +43,8 @@
                 android:id="@+id/password_login_textInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
                 android:layout_marginTop="16dp"
                 style="Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 >
@@ -49,8 +53,8 @@
                     android:id="@+id/password_login_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/outlined_box"
                     android:hint="@string/password"
-                    android:background="#fff"
                     android:inputType="textEmailAddress"
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>

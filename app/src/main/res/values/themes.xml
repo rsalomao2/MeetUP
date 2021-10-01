@@ -30,6 +30,7 @@
         <item name="android:layout_marginTop">@dimen/login_btn_icon_margin</item>
     </style>
 
+
     <style name="RowTextStyle">
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginEnd">16dp</item>
