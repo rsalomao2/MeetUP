@@ -1,4 +1,4 @@
-package com.example.meetup.fragments
+package com.example.meetup.presentation
 
 import android.content.Context
 import android.os.Bundle
@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.meetup.R
 import com.example.meetup.databinding.FragmentRegistrationBinding
 import com.example.meetup.util.AutoMask.Companion.mask

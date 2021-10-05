@@ -1,12 +1,14 @@
-package com.example.meetup.fragments
+package com.example.meetup.presentation
 
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.meetup.R
@@ -59,6 +61,7 @@ class RecyclerViewFragment : Fragment() {
                 showData(users)
                 hideLoading()
             }
+
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
                 connectionFailureDialog()
             }
@@ -102,8 +105,8 @@ class RecyclerViewFragment : Fragment() {
         }
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = UsersAdapters(userListItem) {
-                navigateToUserDetailFragment(it)
+            adapter = UsersAdapters(userListItem) { user, view ->
+                navigateToUserDetailFragment(user, view)
             }
         }
     }
@@ -121,11 +124,19 @@ class RecyclerViewFragment : Fragment() {
         )
     }
 
-    private fun navigateToUserDetailFragment(it: UserListItem) {
+    private fun navigateToUserDetailFragment(it: UserListItem, view: View) {
         val newUser = createNewUser(it)
-        val action =
-            RecyclerViewFragmentDirections.actionRecyclerViewFragmentToUserDetailFragment(newUser)
-        findNavController().navigate(action)
+        ViewCompat.setTransitionName(view, "item_image")
+        val extras = FragmentNavigatorExtras(view to "image_big")
+
+        findNavController().navigate(
+            R.id.action_recyclerViewFragment_to_userDetailFragment,
+            Bundle().apply {
+                putParcelable("mKey", newUser)
+            },
+            null,
+            extras
+        )
     }
 
 }

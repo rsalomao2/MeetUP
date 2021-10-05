@@ -3,10 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -134,7 +130,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/login_email_btn"
-                style="@style/ButtonStyle"
+                style="@style/LoginButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_btn_login"
@@ -162,7 +158,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/login_anonymously"
-                style="@style/ButtonStyle"
+                style="@style/LoginButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_btn_anonymously"
@@ -221,6 +217,4 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-
 </layout>

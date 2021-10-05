@@ -1,4 +1,4 @@
-package com.example.meetup
+package com.example.meetup.presentation
 
 import android.Manifest
 import android.content.Context
@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.meetup.R
 import kotlinx.android.synthetic.main.fragment_camera.*
 import java.io.File
 import java.text.SimpleDateFormat
@@ -135,7 +136,7 @@ class CameraFragment : Fragment() {
                     val msg = "Photo capture succeeded: $savedUri"
                     Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
                     Log.d("###", msg)
-                    findNavController().navigate(R.id.action_cameraFragment_to_userDetailFragment)
+                    findNavController().popBackStack()
                 }
             })
     }

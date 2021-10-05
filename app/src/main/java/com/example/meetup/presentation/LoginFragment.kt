@@ -1,4 +1,4 @@
-package com.example.meetup.fragments
+package com.example.meetup.presentation
 
 import android.content.Intent
 import android.os.Bundle
@@ -159,9 +159,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        Log.d("###", "FUNCIONA KRO MENU")
-        menu.findItem(R.id.menu_logout).setVisible(false)
-        Log.d("###", "FUNCIONA KRO MENU")
+        menu.findItem(R.id.menu_logout).isVisible = false
     }
 
     private fun signInAnonymously() {

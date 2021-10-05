@@ -1,4 +1,4 @@
-package com.example.meetup.fragments
+package com.example.meetup.presentation
 
 import android.os.Bundle
 import android.util.Log

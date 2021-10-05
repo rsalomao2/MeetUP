@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.user_row.view.*
 
 class UsersAdapters(
     private val userListItem: List<UserListItem>,
-    private val onClickItem: (UserListItem) -> Unit
+    private val onClickItem: (UserListItem, View) -> Unit
 ) :
     RecyclerView.Adapter<UsersAdapters.ViewHolder>() {
 
@@ -45,8 +45,8 @@ class UsersAdapters(
             .load(userListItem.imageUrl)
             .placeholder(R.drawable.ic_launcher_background)
             .into(holder.image)
-        holder.itemView.setOnClickListener {
-            onClickItem(userListItem)
+        holder.itemView.setOnClickListener { view ->
+            onClickItem(userListItem, view)
         }
     }
 
