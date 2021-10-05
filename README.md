@@ -100,23 +100,23 @@
 
 - Login Form
 - [x] Titulo da tela
-- [ ] O hint dos campos estao muito pra dentro
-- [ ] Testar colcar campos em box
+- [x] O hint dos campos estao muito pra dentro
+- [x] Testar colcar campos em box
 - [x] Toolbar esta deslizando junto com os campos
 
 - Signup
-- [ ] Titulo da tela ir para toolbar removendo de dentro do fragment
+- [x] Titulo da tela ir para toolbar removendo de dentro do fragment
 - [x] Toolbar esta deslizando junto com os campos
 
 
-- [ ] Testar colcar campos em box
+- [x] Testar colcar campos em box
 
 - RecycleView
-- [ ] Titulo deve representar melhor o que a tela faz
+- [x] Titulo deve representar melhor o que a tela faz
 https://docs.microsoft.com/pt-br/xamarin/android/user-interface/controls/card-view-images/01-cardview-example.png
 - [x] Imagem no topo
-- [ ] Nome no bottom da imagem com fundo preto e transparencia de 80% (opacidade)
-- [ ] Remover os ":" e deixar label em negrito e valor em normal
+- [x] Nome no bottom da imagem com fundo preto e transparencia de 80% (opacidade)
+- [x] Remover os ":" e deixar label em negrito e valor em normal
 - [x] Em baixo os outros campos em cor preta fundo branco
 
 - Detalhes do item clicado
@@ -133,15 +133,15 @@ https://docs.microsoft.com/pt-br/xamarin/android/user-interface/controls/card-vi
 - [ ] Trocar icone logout por camera
 - [ ] Ao clicar no icone da camera na toolbar devemos dar opcao, atraves de um dialog, de tirar foto ou carregar imagem
 - [ ] Colocar botao de adicionar imagem do celular
-- [ ] Aumentar tamanho do collpse toolbar para 40% da tela (veja se da pra fazer isso)
+- [x] Aumentar tamanho do collpse toolbar para 40% da tela (veja se da pra fazer isso)
 - [ ] Caso o usuario ja tenha escolhido a data de nascimento, desabilitar o botão, porém continua mostrar (cinza claro)
 - [ ] Atualizar o objeto Usuario com os dados de nascimento pegos no Date Picker 
-- [ ] adicionar no item texto caixa alta SHARE (Abre apps com plain-text)
+- [x] adicionar no item texto caixa alta SHARE (Abre apps com plain-text)
 https://developer.android.com/training/sharing/send
 
 - Map
 - [x] Adicionar toolbar
-- [ ] Nome da tela na toolbar Map
+- [x] Nome da tela na toolbar Map
 - [ ] Adicionar movimentacao de camera
 - [ ] Ao clicar no map, checar permissao
 - [ ] Ao abrir o map dar zoom na localizacao atual do usuario
