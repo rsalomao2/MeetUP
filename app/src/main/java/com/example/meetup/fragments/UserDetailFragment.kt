@@ -98,6 +98,13 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         setupMap()
         setupDateTimePickerBtn()
         setupShareIntent()
+        setupCameraBtn()
+    }
+
+    private fun setupCameraBtn() {
+        binding.cameraBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_userDetailFragment_to_cameraFragment)
+        }
     }
 
     private fun setupShareIntent() {
@@ -108,7 +115,6 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
                 putExtra(Intent.EXTRA_TEXT, userString)
                 type = "text/plain"
             }
-
             val shareIntent = Intent.createChooser(sendIntent, null)
             startActivity(shareIntent)
         }

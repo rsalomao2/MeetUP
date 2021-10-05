@@ -294,7 +294,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:layout_marginBottom="8dp"
                             android:layout_weight="1"
                             android:text="@string/pick_date_and_time" />
 
@@ -305,6 +304,14 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@string/share" />
+
+                        <Button
+                            android:id="@+id/cameraBtn"
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Camera" />
 
                         <Button
                             android:id="@+id/mapBtn"

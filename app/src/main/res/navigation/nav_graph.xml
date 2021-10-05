@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_userDetailFragment_to_mapsFragment"
             app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_userDetailFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -77,5 +80,14 @@
         <action
             android:id="@+id/action_splashFragment_to_recyclerViewFragment"
             app:destination="@id/recyclerViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.example.meetup.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" >
+        <action
+            android:id="@+id/action_cameraFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment" />
     </fragment>
 </navigation>
