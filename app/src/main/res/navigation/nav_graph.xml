@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.meetup.fragments.LoginFragment"
+        android:name="com.example.meetup.presentation.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/recyclerViewFragment"
-        android:name="com.example.meetup.fragments.RecyclerViewFragment"
+        android:name="com.example.meetup.presentation.RecyclerViewFragment"
         android:label="@string/users"
         tools:layout="@layout/fragment_recyclerview" >
         <action
@@ -30,27 +30,24 @@
     </fragment>
     <fragment
         android:id="@+id/userDetailFragment"
-        android:name="com.example.meetup.fragments.UserDetailFragment"
+        android:name="com.example.meetup.presentation.UserDetailFragment"
         android:label="Users Detail"
         tools:layout="@layout/fragment_user_detail">
         <argument
             android:name="userObject"
-            app:argType="com.example.meetup.model.UserComplete" />
+            app:argType="com.example.meetup.model.FirestoreUser" />
         <action
             android:id="@+id/action_userDetailFragment_to_mapsFragment"
             app:destination="@id/mapsFragment" />
-        <action
-            android:id="@+id/action_userDetailFragment_to_cameraFragment"
-            app:destination="@id/cameraFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.example.meetup.fragments.RegistrationFragment"
-        android:label="Sign Up"
+        android:name="com.example.meetup.presentation.RegistrationFragment"
+        android:label="SignUp"
         tools:layout="@layout/fragment_registration"/>
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="com.example.meetup.fragments.MapsFragment"
+        android:name="com.example.meetup.presentation.MapsFragment"
         android:label="@string/maps"
         tools:layout="@layout/fragment_maps" >
         <argument
@@ -59,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/emailLoginFragment"
-        android:name="com.example.meetup.fragments.EmailLoginFragment"
+        android:name="com.example.meetup.presentation.EmailLoginFragment"
         android:label="@string/signin"
         tools:layout="@layout/fragment_email_login" >
         <action
@@ -71,7 +68,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.meetup.fragments.SplashFragment"
+        android:name="com.example.meetup.presentation.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -80,14 +77,5 @@
         <action
             android:id="@+id/action_splashFragment_to_recyclerViewFragment"
             app:destination="@id/recyclerViewFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/cameraFragment"
-        android:name="com.example.meetup.CameraFragment"
-        android:label="fragment_camera"
-        tools:layout="@layout/fragment_camera" >
-        <action
-            android:id="@+id/action_cameraFragment_to_userDetailFragment"
-            app:destination="@id/userDetailFragment" />
     </fragment>
 </navigation>
