@@ -1,5 +1,6 @@
 package com.example.meetup.model
 
+import android.graphics.Bitmap
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
@@ -12,5 +13,6 @@ data class UserComplete(
     var imageUrl: String,
     val phone: String,
     val website: String,
-    val address: Address
+    val address: Address,
+    var imageBitmap: Bitmap?
 ): Parcelable

@@ -1,10 +1,14 @@
-package com.example.meetup.fragments
+package com.example.meetup.presentation
 
+import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.*
 import android.widget.DatePicker
@@ -18,6 +22,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.example.meetup.R
 import com.example.meetup.databinding.FragmentUserDetailBinding
+import com.example.meetup.model.UserComplete
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -31,6 +36,14 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
     private lateinit var navController: NavController
     private lateinit var mAuth: FirebaseAuth
     private val args: UserDetailFragmentArgs by navArgs()
+    private val user by lazy {
+        arguments?.getParcelable("mKey") as? UserComplete
+    }
+
+    companion object {
+        private const val REQUEST_IMAGE_CAPTURE = 1
+        private const val TAG = "UserDetailFragment"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,6 +78,15 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            binding.expandedImage.setImageBitmap(imageBitmap)
+            user?.let { userObject ->
+                userObject.imageBitmap = imageBitmap
+            }
+        }
+    }
 
     override fun onResume() {
         super.onResume()
@@ -103,13 +125,23 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
     private fun setupCameraBtn() {
         binding.cameraBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_userDetailFragment_to_cameraFragment)
+            openCameraApp()
+        }
+    }
+
+    private fun openCameraApp() {
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        try {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+        } catch (e: ActivityNotFoundException) {
+            // display error state to the user
+            Log.d(TAG, e.message ?: "Couldn't be able to open camera")
         }
     }
 
     private fun setupShareIntent() {
         val userString = args.userObject.toString()
-        binding.shareBtn.setOnClickListener{
+        binding.shareBtn.setOnClickListener {
             val sendIntent: Intent = Intent().apply {
                 action = Intent.ACTION_SEND
                 putExtra(Intent.EXTRA_TEXT, userString)

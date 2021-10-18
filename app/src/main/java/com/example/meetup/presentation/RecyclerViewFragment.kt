@@ -1,4 +1,4 @@
-package com.example.meetup.fragments
+package com.example.meetup.presentation
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -22,16 +22,15 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
 class RecyclerViewFragment : Fragment() {
 
     private lateinit var binding: FragmentRecyclerviewBinding
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_recyclerview, container, false)
         return binding.root
@@ -117,7 +116,8 @@ class RecyclerViewFragment : Fragment() {
             it.imageUrl,
             it.phoneText,
             it.websiteText,
-            it.address
+            it.address,
+            null
         )
     }
 
@@ -127,6 +127,5 @@ class RecyclerViewFragment : Fragment() {
             RecyclerViewFragmentDirections.actionRecyclerViewFragmentToUserDetailFragment(newUser)
         findNavController().navigate(action)
     }
-
 }
 
