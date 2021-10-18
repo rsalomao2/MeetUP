@@ -3,17 +3,16 @@ package com.example.meetup.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.meetup.R
 import com.example.meetup.model.FirestoreUser
+import com.example.meetup.model.UserListItem
 import kotlinx.android.synthetic.main.database_user_row.view.*
-import kotlinx.android.synthetic.main.user_row.view.*
-import kotlinx.android.synthetic.main.user_row.view.databaseFirstNameTextView
-import kotlinx.android.synthetic.main.user_row.view.listRowImage
 
-class DatabaseAdapter(private val userList: ArrayList<FirestoreUser>) :
+class DatabaseAdapter(private val userList: ArrayList<FirestoreUser>,
+                      private val onClickItem: (FirestoreUser) -> Unit
+) :
     RecyclerView.Adapter<DatabaseAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -32,6 +31,9 @@ class DatabaseAdapter(private val userList: ArrayList<FirestoreUser>) :
         holder.first.text = user.first
         holder.last.text = user.last
         holder.email.text = user.email
+        holder.itemView.setOnClickListener {
+            onClickItem(user)
+        }
     }
 
     override fun getItemCount(): Int = userList.size

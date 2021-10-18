@@ -95,29 +95,37 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
 
     private fun setupUi() {
-        val addressObject = args.userObject.address
-        val userObject = args.userObject
+                val userObject = args.userObject
 
         binding.apply {
-            userDetailZipCodeTextView.text = addressObject.zipcode
-            userDetailSuiteTextView.text = addressObject.suite
-            userDetailCityTextView.text = addressObject.city
-            userDetailStreetTextView.text = addressObject.street
-
-            userDetailUserNameTextView.text = userObject.username
+            userDetailFirstNameTextView.text = userObject.first
+            userDetailLastNameTextView.text = userObject.last
             userDetailEmailTextView.text = userObject.email
-            userDetailIdTextView.text = userObject.id
             userDetailPhoneNumberTextView.text = userObject.phone
-            userDetailWebsiteTextView.text = userObject.website
+            userDetailCpfTextView.text = userObject.cpf
         }
-        val userUrl = userObject.imageUrl
+        val userUrl = randomUrl()
         Glide.with(requireContext())
             .load(userUrl)
             .into(binding.expandedImage)
     }
 
+    private fun randomUrl(): String {
+        val listOfUrl = listOf(
+            "https://picsum.photos/130?random=$1.jpg",
+            "https://picsum.photos/200?random=2.jpg",
+            "https://picsum.photos/200?random=3.jpg",
+            "https://picsum.photos/200?random=4.jpg",
+            "https://picsum.photos/200?random=5.jpg",
+            "https://picsum.photos/200?random=6.jpg",
+            "https://picsum.photos/200?random=7.jpg",
+            "https://picsum.photos/200?random=8.jpg"
+        )
+        return listOfUrl.random()
+    }
+
     private fun setupListener() {
-        setupMap()
+        //setupMap()
         setupDateTimePickerBtn()
         setupShareIntent()
         setupCameraBtn()
@@ -162,18 +170,18 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         }
     }
 
-    private fun setupMap() {
-        val userObject = args.userObject
-        val action =
-            UserDetailFragmentDirections.actionUserDetailFragmentToMapsFragment(userObject)
-        binding.mapBtn.setOnClickListener {
-            navController.navigate(action)
-        }
-    }
+//    private fun setupMap() {
+//        val userObject = args.userObject
+//        val action =
+//            UserDetailFragmentDirections.actionUserDetailFragmentToMapsFragment(userObject)
+//        binding.mapBtn.setOnClickListener {
+//            navController.navigate(action)
+//        }
+//    }
 
     private fun setupToolbar() {
         binding.collapsingToolbarLayout.apply {
-            title = args.userObject.name
+            title = args.userObject.first
             setExpandedTitleColor(Color.WHITE)
             setCollapsedTitleTextColor(Color.WHITE)
         }

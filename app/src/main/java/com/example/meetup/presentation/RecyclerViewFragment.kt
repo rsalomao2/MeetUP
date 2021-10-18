@@ -12,17 +12,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.meetup.R
 import com.example.meetup.adapter.DatabaseAdapter
-import com.example.meetup.adapter.UsersAdapters
 import com.example.meetup.databinding.FragmentRecyclerviewBinding
 import com.example.meetup.model.FirestoreUser
 import com.example.meetup.model.User
 import com.example.meetup.model.UserComplete
 import com.example.meetup.model.UserListItem
 import com.example.meetup.service.ApiService
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import retrofit2.Call
@@ -51,31 +46,32 @@ class RecyclerViewFragment : Fragment() {
         setupFirebaseFirestore()
     }
 
-    private fun setupNetwork() {
-        val api = Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(ApiService::class.java)
-
-        api.fetchAllUsers().enqueue(object : Callback<List<User>> {
-            override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
-                showLoading()
-                val users = response.body() ?: emptyList()
-                users.forEach {
-                    it.imageUrl = randomUrl()
-                }
-                showData(users)
-                hideLoading()
-            }
-
-            override fun onFailure(call: Call<List<User>>, t: Throwable) {
-                connectionFailureDialog()
-            }
-        })
-    }
+//    private fun setupNetwork() {
+//        val api = Retrofit.Builder()
+//            .baseUrl("https://jsonplaceholder.typicode.com")
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
+//            .create(ApiService::class.java)
+//
+//        api.fetchAllUsers().enqueue(object : Callback<List<User>> {
+//            override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
+//                showLoading()
+//                val users = response.body() ?: emptyList()
+//                users.forEach {
+//                    it.imageUrl = randomUrl()
+//                }
+//                //showData(users)
+//                hideLoading()
+//            }
+//
+//            override fun onFailure(call: Call<List<User>>, t: Throwable) {
+//                connectionFailureDialog()
+//            }
+//        })
+//    }
 
     private fun setupFirebaseFirestore() {
+        showLoading()
         val db = Firebase.firestore
         db.collection("users")
             .get()
@@ -140,41 +136,54 @@ class RecyclerViewFragment : Fragment() {
         connectionFailureDialog.show()
     }
 
-    private fun showData(users: List<User>) {
-        val userListItem: List<UserListItem> = users.map { user ->
-            user.convertToUserListItem()
-        }
+//    private fun showData(users: List<User>) {
+//        val userListItem: List<UserListItem> = users.map { user ->
+//            user.convertToUserListItem()
+//        }
+//        binding.recyclerView.apply {
+//            layoutManager = LinearLayoutManager(requireContext())
+//            adapter = UsersAdapters(userListItem) {
+//                navigateToUserDetailFragment(it)
+//            }
+//        }
+//    }
+
+    private fun showDatabaseData(users: ArrayList<FirestoreUser>) {
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = UsersAdapters(userListItem) {
+            adapter = DatabaseAdapter(users){
                 navigateToUserDetailFragment(it)
             }
         }
     }
 
-    private fun showDatabaseData(users: ArrayList<FirestoreUser>) {
-        binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = DatabaseAdapter(users)
-        }
-    }
-
-    private fun createNewUser(it: UserListItem): UserComplete {
-        return UserComplete(
-            it.name,
-            it.userNameText,
-            it.emailText,
-            it.idText,
-            it.imageUrl,
-            it.phoneText,
-            it.websiteText,
-            it.address,
-            null
+    private fun createFirestoreUser(user: FirestoreUser): FirestoreUser{
+        return FirestoreUser(
+            user.first,
+            user.last,
+            user.email,
+            user.phone,
+            user.cpf
         )
     }
 
-    private fun navigateToUserDetailFragment(it: UserListItem) {
-        val newUser = createNewUser(it)
+//    private fun createNewUser(it: UserListItem): UserComplete {
+//        return UserComplete(
+//            it.name,
+//            it.userNameText,
+//            it.emailText,
+//            it.idText,
+//            it.imageUrl,
+//            it.phoneText,
+//            it.websiteText,
+//            it.address,
+//            null
+//        )
+//    }
+
+    private fun navigateToUserDetailFragment(it: FirestoreUser) {
+        val newUser = createFirestoreUser(it)
+       // val newUser = createNewUser(it)
         val action =
             RecyclerViewFragmentDirections.actionRecyclerViewFragmentToUserDetailFragment(newUser)
         findNavController().navigate(action)

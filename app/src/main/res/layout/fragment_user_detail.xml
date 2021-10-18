@@ -34,6 +34,7 @@
                     android:layout_height="200dp"
                     android:contentDescription="@string/app_name"
                     android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_background"
                     app:layout_collapseMode="parallax"
                     app:layout_collapseParallaxMultiplier="0.7" />
 
@@ -71,32 +72,53 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/detailUsernameLabel"
+                        android:id="@+id/detailFirstNameLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_marginStart="16dp"
-                        android:text="@string/username"
+                        android:text="@string/first_name"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@id/userDetailUserNameTextView"
+                        app:layout_constraintBottom_toBottomOf="@id/userDetailFirstNameTextView"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/userDetailUserNameTextView" />
+                        app:layout_constraintTop_toTopOf="@id/userDetailFirstNameTextView" />
 
                     <TextView
-                        android:id="@+id/userDetailUserNameTextView"
+                        android:id="@+id/userDetailFirstNameTextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginBottom="16dp"
-                        app:layout_constraintBottom_toTopOf="@+id/userDetailEmailTextView"
+                        app:layout_constraintBottom_toTopOf="@+id/userDetailLastNameTextView"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/detailUsernameLabel"
+                        app:layout_constraintStart_toEndOf="@id/detailFirstNameLabel"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/detailEmailLabel"
+                        android:id="@+id/detailLastNameLabel"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/last_name"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/userDetailLastNameTextView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/userDetailLastNameTextView" />
+
+                    <TextView
+                        android:id="@+id/userDetailLastNameTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/uderDetailMargin"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="@+id/userDetailFirstNameTextView"
+                        app:layout_constraintStart_toEndOf="@id/detailLastNameLabel"
+                        app:layout_constraintTop_toBottomOf="@id/userDetailFirstNameTextView" />
+
+                    <TextView
+                        android:id="@+id/detailEmailLabel"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:text="@string/email"
@@ -109,32 +131,11 @@
                         android:id="@+id/userDetailEmailTextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintEnd_toEndOf="@+id/userDetailUserNameTextView"
-                        app:layout_constraintStart_toEndOf="@id/detailEmailLabel"
-                        app:layout_constraintTop_toBottomOf="@id/userDetailUserNameTextView" />
-
-                    <TextView
-                        android:id="@+id/detailIDlLabel"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:text="@string/id"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@id/userDetailIdTextView"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/userDetailIdTextView" />
-
-                    <TextView
-                        android:id="@+id/userDetailIdTextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
-                        app:layout_constraintEnd_toEndOf="@id/userDetailEmailTextView"
-                        app:layout_constraintStart_toEndOf="@+id/detailIDlLabel"
-                        app:layout_constraintTop_toBottomOf="@id/userDetailEmailTextView" />
+                        app:layout_constraintEnd_toEndOf="@id/userDetailLastNameTextView"
+                        app:layout_constraintStart_toEndOf="@+id/detailEmailLabel"
+                        app:layout_constraintTop_toBottomOf="@id/userDetailLastNameTextView" />
 
                     <TextView
                         android:id="@+id/detailPhonelLabel"
@@ -153,140 +154,40 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/uderDetailMargin"
                         android:layout_marginTop="8dp"
-                        app:layout_constraintEnd_toEndOf="@id/userDetailIdTextView"
+                        app:layout_constraintEnd_toEndOf="@id/userDetailEmailTextView"
                         app:layout_constraintStart_toEndOf="@id/detailPhonelLabel"
-                        app:layout_constraintTop_toBottomOf="@id/userDetailIdTextView" />
+                        app:layout_constraintTop_toBottomOf="@id/userDetailEmailTextView" />
 
                     <TextView
-                        android:id="@+id/detailWebsitelLabel"
+                        android:id="@+id/detailCpfLabel"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:text="@string/website"
+                        android:text="@string/cpf"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@id/userDetailWebsiteTextView"
+                        app:layout_constraintBottom_toBottomOf="@id/userDetailCpfTextView"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/userDetailWebsiteTextView" />
+                        app:layout_constraintTop_toTopOf="@id/userDetailCpfTextView" />
 
                     <TextView
-                        android:id="@+id/userDetailWebsiteTextView"
+                        android:id="@+id/userDetailCpfTextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/uderDetailMargin"
                         android:layout_marginTop="8dp"
                         app:layout_constraintEnd_toEndOf="@id/userDetailPhoneNumberTextView"
-                        app:layout_constraintStart_toEndOf="@id/detailWebsitelLabel"
+                        app:layout_constraintStart_toEndOf="@id/detailCpfLabel"
                         app:layout_constraintTop_toBottomOf="@id/userDetailPhoneNumberTextView" />
-
-                    <TextView
-                        android:id="@+id/userDetailAddressTitleTextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/address"
-                        android:textAlignment="center"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@id/userDetailWebsiteTextView"
-                        app:layout_constraintStart_toStartOf="@+id/detailWebsitelLabel"
-                        app:layout_constraintTop_toBottomOf="@id/userDetailWebsiteTextView" />
-
-                    <TextView
-                        android:id="@+id/detailStreetlLabel"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/streetLabel"
-                        android:textStyle="bold"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintTop_toTopOf="@id/userDetailStreetTextView"
-                        app:layout_constraintBottom_toBottomOf="@id/userDetailStreetTextView"
-                        app:layout_constraintStart_toStartOf="parent"/>
-
-                    <TextView
-                        android:id="@+id/userDetailStreetTextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintEnd_toEndOf="@id/userDetailAddressTitleTextView"
-                        app:layout_constraintStart_toEndOf="@id/detailStreetlLabel"
-                        app:layout_constraintTop_toBottomOf="@id/userDetailAddressTitleTextView" />
-
-                    <TextView
-                        android:id="@+id/detailSuitelLabel"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/suiteLabel"
-                        android:textStyle="bold"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintTop_toTopOf="@id/userDetailSuiteTextView"
-                        app:layout_constraintBottom_toBottomOf="@id/userDetailSuiteTextView"
-                        app:layout_constraintStart_toStartOf="parent"/>
-
-                    <TextView
-                        android:id="@+id/userDetailSuiteTextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintEnd_toEndOf="@id/userDetailStreetTextView"
-                        app:layout_constraintStart_toEndOf="@id/detailSuitelLabel"
-                        app:layout_constraintTop_toBottomOf="@id/userDetailStreetTextView" />
-
-                    <TextView
-                        android:id="@+id/detailCitylLabel"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/cityLabel"
-                        android:textStyle="bold"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintTop_toTopOf="@id/userDetailCityTextView"
-                        app:layout_constraintBottom_toBottomOf="@id/userDetailCityTextView"
-                        app:layout_constraintStart_toStartOf="parent"/>
-
-                    <TextView
-                        android:id="@+id/userDetailCityTextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintEnd_toEndOf="@id/userDetailSuiteTextView"
-                        app:layout_constraintStart_toEndOf="@id/detailCitylLabel"
-                        app:layout_constraintTop_toBottomOf="@id/userDetailSuiteTextView" />
-
-                    <TextView
-                        android:id="@+id/detaiZipCodeLabel"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/zipCodeLabel"
-                        android:textStyle="bold"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintTop_toTopOf="@id/userDetailZipCodeTextView"
-                        app:layout_constraintBottom_toBottomOf="@id/userDetailZipCodeTextView"
-                        app:layout_constraintStart_toStartOf="parent"/>
-
-                    <TextView
-                        android:id="@+id/userDetailZipCodeTextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/uderDetailMargin"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintEnd_toEndOf="@id/userDetailCityTextView"
-                        app:layout_constraintStart_toEndOf="@id/detaiZipCodeLabel"
-                        app:layout_constraintTop_toBottomOf="@id/userDetailCityTextView" />
 
                     <LinearLayout
                         android:id="@+id/detailButtonsLinearLayout"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="16dp"
                         android:orientation="horizontal"
-                        app:layout_constraintEnd_toEndOf="@id/userDetailZipCodeTextView"
-                        app:layout_constraintStart_toStartOf="@+id/detaiZipCodeLabel"
-                        app:layout_constraintTop_toBottomOf="@id/userDetailZipCodeTextView">
+                        app:layout_constraintEnd_toEndOf="@id/userDetailCpfTextView"
+                        app:layout_constraintStart_toStartOf="@+id/detailCpfLabel"
+                        app:layout_constraintTop_toBottomOf="@+id/userDetailCpfTextView">
 
                         <Button
                             android:id="@+id/datePickerBtn"
