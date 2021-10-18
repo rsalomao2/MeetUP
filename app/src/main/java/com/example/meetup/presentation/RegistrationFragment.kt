@@ -17,10 +17,16 @@ import com.example.meetup.databinding.FragmentRegistrationBinding
 import com.example.meetup.util.AutoMask.Companion.mask
 import com.example.meetup.util.CpfValidator
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class RegistrationFragment : Fragment(R.layout.fragment_registration) {
     private lateinit var binding: FragmentRegistrationBinding
     private lateinit var mAuth: FirebaseAuth
+
+    companion object {
+        private const val TAG = "SignupFragment"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -221,6 +227,8 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
         val phoneNumber = binding.phoneNumberTextInputLayout.editText?.text.toString()
         val cpf = binding.cpfEditText.text.toString()
 
+        saveUserToDb(firstName, lastName, email, phoneNumber, cpf)
+
         val sharedPreferences =
             requireActivity().getSharedPreferences(email, Context.MODE_PRIVATE)
 
@@ -234,5 +242,30 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
         }.apply()
 
         Toast.makeText(context, "Registration Successful", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun saveUserToDb(
+        firstName: String,
+        lastName: String,
+        email: String,
+        phoneNumber: String,
+        cpf: String
+    ) {
+        val db = Firebase.firestore
+        val user = hashMapOf(
+            "first" to firstName,
+            "last" to lastName,
+            "email" to email,
+            "phone" to phoneNumber,
+            "cpf" to cpf
+        )
+        db.collection("users")
+            .add(user)
+            .addOnSuccessListener { documentReference ->
+                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error adding document", e)
+            }
     }
 }
