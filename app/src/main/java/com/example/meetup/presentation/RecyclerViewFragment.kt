@@ -2,6 +2,7 @@ package com.example.meetup.presentation
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +11,20 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.meetup.R
+import com.example.meetup.adapter.DatabaseAdapter
 import com.example.meetup.adapter.UsersAdapters
 import com.example.meetup.databinding.FragmentRecyclerviewBinding
+import com.example.meetup.model.FirestoreUser
 import com.example.meetup.model.User
 import com.example.meetup.model.UserComplete
 import com.example.meetup.model.UserListItem
 import com.example.meetup.service.ApiService
+import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,7 +47,8 @@ class RecyclerViewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupNetwork()
+       // setupNetwork()
+        setupFirebaseFirestore()
     }
 
     private fun setupNetwork() {
@@ -58,10 +68,45 @@ class RecyclerViewFragment : Fragment() {
                 showData(users)
                 hideLoading()
             }
+
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
                 connectionFailureDialog()
             }
         })
+    }
+
+    private fun setupFirebaseFirestore() {
+        val db = Firebase.firestore
+        db.collection("users")
+            .get()
+            .addOnSuccessListener { result ->
+                result.let {
+                    val users = ArrayList<FirestoreUser>()
+                    for (document in result) {
+                        Log.d("###", "${document.id} => ${document.data}")
+                        document.data.let {
+                            val firstName = it["first"] as String
+                            val lastName = it["last"] as String
+                            val email = it["email"] as String
+                            val phone = it["phone"] as String
+                            val cpf = it["cpf"] as String
+                            val user = FirestoreUser(
+                                firstName,
+                                lastName,
+                                email,
+                                phone,
+                                cpf
+                            )
+                            users.add(user)
+                        }
+                    }
+                    showDatabaseData(users)
+                    hideLoading()
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("###", "Error getting documents.", exception)
+            }
     }
 
     private fun showLoading() {
@@ -104,6 +149,13 @@ class RecyclerViewFragment : Fragment() {
             adapter = UsersAdapters(userListItem) {
                 navigateToUserDetailFragment(it)
             }
+        }
+    }
+
+    private fun showDatabaseData(users: ArrayList<FirestoreUser>) {
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = DatabaseAdapter(users)
         }
     }
 
