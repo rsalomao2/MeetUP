@@ -15,6 +15,7 @@ import com.example.meetup.adapter.DatabaseAdapter
 import com.example.meetup.databinding.FragmentUserslistBinding
 import com.example.meetup.model.FirestoreUser
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 
 class UsersListFragment : Fragment() {
@@ -45,24 +46,11 @@ class UsersListFragment : Fragment() {
                 result.let {
                     val users = ArrayList<FirestoreUser>()
                     for (document in result) {
-                        Log.d("###", "${document.id} => ${document.data}")
-                        document.data.let {
-                            val firstName = it["first"] as String
-                            val lastName = it["last"] as String
-                            val email = it["email"] as String
-                            val phone = it["phone"] as String
-                            val cpf = it["cpf"] as String
-                            val id = document.id
-                            val user = FirestoreUser(
-                                firstName,
-                                lastName,
-                                email,
-                                phone,
-                                cpf,
-                                id,
-                                null,
-                                null
-                            )
+                        val user = document.toObject<FirestoreUser>()
+                        user.let {
+                            user.apply {
+                                id = document.id
+                            }
                             users.add(user)
                         }
                     }

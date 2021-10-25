@@ -31,8 +31,8 @@ import com.example.meetup.model.FirestoreUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
@@ -65,6 +65,7 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         mAuth = Firebase.auth
         setupUi()
         setupListener()
+
         setupToolbar()
         setHasOptionsMenu(true)
         return binding.root
@@ -97,9 +98,12 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.d("###", "$toolbar")
+    private fun updateUserBirthInfo() {
+        if (user?.birthTime != null && user?.birthTime != null) {
+            val birth = user?.birthday
+            binding.datePickerText.text = birth
+            binding.timePickerText.text = user?.birthTime
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -129,9 +133,12 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         val savedMonth = month.toString()
         val savedYear = year.toString()
         TimePickerDialog(requireContext(), this, hour, minute, true).show()
-        db.collection("users").document(args.userObject.id).update(mapOf(
-            "birthday" to "$savedDay/$savedMonth/$savedYear"
-        ))
+        db.collection("users").document(args.userObject.id).update(
+            mapOf(
+                "birthday" to "$savedDay/$savedMonth/$savedYear"
+            )
+        )
+        user?.birthday = "$savedDay/$savedMonth/$savedYear"
         binding.datePickerText.text =
             getString(R.string.dateMessage, savedDay, savedMonth, savedYear)
     }
@@ -139,16 +146,19 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         val savedHour = hourOfDay.toString()
         val savedMinute = minute.toString()
-        db.collection("users").document(args.userObject.id).update(mapOf(
-            "birthtime" to "$savedHour:$savedMinute"
-        ))
+        db.collection("users").document(args.userObject.id).update(
+            mapOf(
+                "birthtime" to "$savedHour:$savedMinute"
+            )
+        )
+        user?.birthTime = "$savedHour:$savedMinute"
         binding.timePickerText.text =
             getString(R.string.timeMessage, savedHour, savedMinute)
     }
 
     private fun setupUi() {
         val userObject = args.userObject
-
+        updateUserBirthInfo()
         binding.apply {
             userDetailFirstNameTextView.text = userObject.first
             userDetailLastNameTextView.text = userObject.last
