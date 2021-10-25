@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class RegistrationFragment : Fragment(R.layout.fragment_registration) {
+class SignUpFragment : Fragment(R.layout.fragment_registration) {
     private lateinit var binding: FragmentRegistrationBinding
     private lateinit var mAuth: FirebaseAuth
 
@@ -220,13 +220,13 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
     }
 
     private fun saveData() {
-        createFirebaseUser()
         val firstName = binding.firstNameTextInputLayout.editText?.text.toString()
         val lastName = binding.lastNameTextInputLayout.editText?.text.toString()
         val email = binding.registrationEmailTextInputLayout.editText?.text.toString()
         val phoneNumber = binding.phoneNumberTextInputLayout.editText?.text.toString()
         val cpf = binding.cpfEditText.text.toString()
 
+        createFirebaseUser()
         saveUserToDb(firstName, lastName, email, phoneNumber, cpf)
 
         val sharedPreferences =

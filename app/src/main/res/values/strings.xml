@@ -70,4 +70,6 @@
     <string name="website">Website</string>
     <string name="date_of_birth">Date of Birth</string>
     <string name="hour_of_birth">Hour of Birth</string>
+    <string name="connectionErrorDialogMsg">Cannot connect to the internet. Please check your internet connection</string>
+    <string name="connectionErrorDialogTitle">Connection Failure</string>
 </resources>

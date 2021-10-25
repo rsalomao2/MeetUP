@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.meetup.presentation.LoginFragment"
+        android:name="com.example.meetup.presentation.SignInFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -21,9 +21,9 @@
     </fragment>
     <fragment
         android:id="@+id/recyclerViewFragment"
-        android:name="com.example.meetup.presentation.RecyclerViewFragment"
+        android:name="com.example.meetup.presentation.UsersListFragment"
         android:label="@string/users"
-        tools:layout="@layout/fragment_recyclerview" >
+        tools:layout="@layout/fragment_userslist" >
         <action
             android:id="@+id/action_recyclerViewFragment_to_userDetailFragment"
             app:destination="@id/userDetailFragment" />
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.example.meetup.presentation.RegistrationFragment"
+        android:name="com.example.meetup.presentation.SignUpFragment"
         android:label="SignUp"
         tools:layout="@layout/fragment_registration"/>
     <fragment
@@ -52,7 +52,7 @@
         tools:layout="@layout/fragment_maps" >
         <argument
             android:name="userObject"
-            app:argType="com.example.meetup.model.UserComplete" />
+            app:argType="com.example.meetup.model.FirestoreUser" />
     </fragment>
     <fragment
         android:id="@+id/emailLoginFragment"

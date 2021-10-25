@@ -27,7 +27,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class LoginFragment : Fragment(R.layout.fragment_login) {
+class SignInFragment : Fragment(R.layout.fragment_login) {
 
     private val callbackManager = CallbackManager.Factory.create()
 

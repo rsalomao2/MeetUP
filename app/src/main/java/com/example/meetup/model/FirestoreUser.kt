@@ -1,5 +1,6 @@
 package com.example.meetup.model
 
+import android.graphics.Bitmap
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
@@ -10,4 +11,7 @@ data class FirestoreUser(
     val email: String,
     val phone: String,
     var cpf: String,
+    val id: String,
+    var imageBitmap: Bitmap?,
+    var address: Address?
 ): Parcelable

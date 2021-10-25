@@ -1,10 +1,12 @@
 package com.example.meetup.presentation
 
+import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
@@ -13,6 +15,9 @@ import android.util.Log
 import android.view.*
 import android.widget.DatePicker
 import android.widget.TimePicker
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -22,9 +27,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.example.meetup.R
 import com.example.meetup.databinding.FragmentUserDetailBinding
-import com.example.meetup.model.UserComplete
+import com.example.meetup.model.FirestoreUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -36,8 +42,11 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
     private lateinit var navController: NavController
     private lateinit var mAuth: FirebaseAuth
     private val args: UserDetailFragmentArgs by navArgs()
+    private val db by lazy {
+        Firebase.firestore
+    }
     private val user by lazy {
-        arguments?.getParcelable("mKey") as? UserComplete
+        arguments?.getParcelable("mKey") as? FirestoreUser
     }
 
     companion object {
@@ -93,9 +102,52 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         Log.d("###", "$toolbar")
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == 10) {
+            if (allPermissionsGranted()) {
+                openCameraApp()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Permissions not granted by the user.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        val cal: Calendar = Calendar.getInstance()
+        val hour = cal.get(Calendar.HOUR)
+        val minute = cal.get(Calendar.MINUTE)
+        val savedDay = dayOfMonth.toString()
+        val savedMonth = month.toString()
+        val savedYear = year.toString()
+        TimePickerDialog(requireContext(), this, hour, minute, true).show()
+        db.collection("users").document(args.userObject.id).update(mapOf(
+            "birthday" to "$savedDay/$savedMonth/$savedYear"
+        ))
+        binding.datePickerText.text =
+            getString(R.string.dateMessage, savedDay, savedMonth, savedYear)
+    }
+
+    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
+        val savedHour = hourOfDay.toString()
+        val savedMinute = minute.toString()
+        db.collection("users").document(args.userObject.id).update(mapOf(
+            "birthtime" to "$savedHour:$savedMinute"
+        ))
+        binding.timePickerText.text =
+            getString(R.string.timeMessage, savedHour, savedMinute)
+    }
 
     private fun setupUi() {
-                val userObject = args.userObject
+        val userObject = args.userObject
 
         binding.apply {
             userDetailFirstNameTextView.text = userObject.first
@@ -138,13 +190,25 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
     }
 
     private fun openCameraApp() {
-        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        try {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-        } catch (e: ActivityNotFoundException) {
-            // display error state to the user
-            Log.d(TAG, e.message ?: "Couldn't be able to open camera")
+        if (allPermissionsGranted()) {
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            try {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+            } catch (e: ActivityNotFoundException) {
+                // display error state to the user
+                Log.d(TAG, e.message ?: "Couldn't be able to open camera")
+            }
+        } else {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.CAMERA),
+                10
+            )
         }
+    }
+
+    private fun allPermissionsGranted() = arrayOf(Manifest.permission.CAMERA).all {
+        ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun setupShareIntent() {
@@ -188,24 +252,5 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         binding.userDetailToolbar.apply {
             setupWithNavController(navController)
         }
-    }
-
-    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        val cal: Calendar = Calendar.getInstance()
-        val hour = cal.get(Calendar.HOUR)
-        val minute = cal.get(Calendar.MINUTE)
-        val savedDay = dayOfMonth.toString()
-        val savedMonth = month.toString()
-        val savedYear = year.toString()
-        TimePickerDialog(requireContext(), this, hour, minute, true).show()
-        binding.datePickerText.text =
-            getString(R.string.dateMessage, savedDay, savedMonth, savedYear)
-    }
-
-    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-        val savedHour = hourOfDay.toString()
-        val savedMinute = minute.toString()
-        binding.timePickerText.text =
-            getString(R.string.timeMessage, savedHour, savedMinute)
     }
 }
