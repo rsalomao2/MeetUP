@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.meetup.R
 import com.example.meetup.model.FirestoreUser
-import com.example.meetup.model.UserListItem
 import kotlinx.android.synthetic.main.database_user_row.view.*
 
 class DatabaseAdapter(private val userList: ArrayList<FirestoreUser>,

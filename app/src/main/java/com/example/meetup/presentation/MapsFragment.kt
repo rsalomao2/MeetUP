@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.example.meetup.R
-import com.example.meetup.model.UserComplete
+import com.example.meetup.model.FirestoreUser
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -22,7 +22,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener {
     private val args: MapsFragmentArgs by navArgs()
     private val user by lazy {
-        arguments?.getParcelable("mKey") as? UserComplete
+        arguments?.getParcelable("mKey") as? FirestoreUser
     }
 
     override fun onCreateView(
@@ -40,8 +40,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragListe
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
-        val geo = args.userObject.address.geo
-        val lat = geo.lat!!
+        val geo = args.userObject.address?.geo
+        val lat = geo?.lat!!
         val lng = geo.lng!!
         val userLocation = LatLng(lat, lng)
         googleMap?.addMarker(
@@ -76,8 +76,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragListe
 
     private fun updateUser(lat: Double?, lng: Double?) {
         user?.let {
-            it.address.geo.lat = lat
-            it.address.geo.lng = lng
+            it.address?.geo?.lat = lat
+            it.address?.geo?.lng = lng
         }
     }
 }
