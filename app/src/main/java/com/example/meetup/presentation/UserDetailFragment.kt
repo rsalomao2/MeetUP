@@ -98,14 +98,6 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
         }
     }
 
-    private fun updateUserBirthInfo() {
-        if (user?.birthTime != null && user?.birthTime != null) {
-            val birth = user?.birthday
-            binding.datePickerText.text = birth
-            binding.timePickerText.text = user?.birthTime
-        }
-    }
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -151,14 +143,31 @@ class UserDetailFragment : Fragment(), DatePickerDialog.OnDateSetListener,
                 "birthtime" to "$savedHour:$savedMinute"
             )
         )
-        user?.birthTime = "$savedHour:$savedMinute"
+        user?.birthtime = "$savedHour:$savedMinute"
         binding.timePickerText.text =
             getString(R.string.timeMessage, savedHour, savedMinute)
     }
 
+    private fun checkUserBirth() {
+        db.collection("users").document(args.userObject.id)
+            .get()
+            .addOnSuccessListener { result ->
+                result.let {document ->
+                    val user = document.toObject<FirestoreUser>()
+                    if(user?.birthday != null && user.birthtime != null) {
+                        binding.datePickerText.text = user.birthday.toString()
+                        binding.timePickerText.text = user.birthtime.toString()
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("###", "Error getting documents.", exception)
+            }
+    }
+
     private fun setupUi() {
         val userObject = args.userObject
-        updateUserBirthInfo()
+        checkUserBirth()
         binding.apply {
             userDetailFirstNameTextView.text = userObject.first
             userDetailLastNameTextView.text = userObject.last

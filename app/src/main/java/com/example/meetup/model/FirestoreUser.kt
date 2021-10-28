@@ -13,7 +13,7 @@ data class FirestoreUser(
     var cpf: String = "",
     var id: String = "",
     var birthday: String? = null,
-    var birthTime: String? = null,
+    var birthtime: String? = null,
     var imageBitmap: Bitmap? = null,
     var address: Address? = null
 ): Parcelable
