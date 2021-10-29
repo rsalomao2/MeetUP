@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.meetup.R
 import com.example.meetup.databinding.FragmentEmailLoginBinding
+import com.example.meetup.extensions.showToast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -56,9 +57,10 @@ class EmailLoginFragment : Fragment() {
                 if (task.isSuccessful) {
                     findNavController().graph.startDestination = R.id.recyclerViewFragment
                     findNavController().navigate(findNavController().graph.startDestination)
-                  // findNavController().navigate(R.id.action_emailLoginFragment_to_recyclerViewFragment)
+                    // findNavController().navigate(R.id.action_emailLoginFragment_to_recyclerViewFragment)
                     Log.d("###", "signInWithEmail:success")
                 } else {
+                    requireContext().showToast("Invalid Email or Password!")
                     Log.w("###", "signInWithEmail:failure", task.exception)
                 }
             }
@@ -129,32 +131,4 @@ class EmailLoginFragment : Fragment() {
             }
         }
     }
-
-//    private fun emailErrorDialog(): Boolean {
-//        val email: String = binding.emailLoginTextInput.editText?.text.toString()
-//        val sharedPreferences =
-//            requireActivity().getSharedPreferences(email, Context.MODE_PRIVATE)
-//        val savedEmail =
-//            sharedPreferences.getString("EMAIL", "")
-//
-//        return when {
-//            email != savedEmail -> {
-//                val emailErrorDialog = AlertDialog.Builder(context)
-//                    .setTitle("Unregistred Email!")
-//                    .setMessage("Create an account ?")
-//                    .setIcon(R.drawable.ic_error)
-//                    .setPositiveButton("Yes") { _, _ ->
-//                        findNavController().navigate(R.id.action_emailLoginFragment_to_registrationFragment)
-//                    }
-//                    .setNegativeButton("No") { _, _ ->
-//                    }.create()
-//                emailErrorDialog.show()
-//                false
-//            }
-//            else -> {
-//                true
-//            }
-//        }
-//    }
-
 }
