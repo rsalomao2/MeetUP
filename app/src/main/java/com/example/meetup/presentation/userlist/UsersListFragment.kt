@@ -1,4 +1,4 @@
-package com.example.meetup.presentation
+package com.example.meetup.presentation.userlist
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.meetup.R
@@ -21,15 +22,27 @@ import com.google.firebase.ktx.Firebase
 class UsersListFragment : Fragment() {
 
     private lateinit var binding: FragmentUserslistBinding
+    private lateinit var viewModel: UsersListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_userslist, container, false)
+        setupViewModel()
         return binding.root
+    }
+
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(this).get(UsersListViewModel::class.java)
+        viewModel.loadingState.observe(viewLifecycleOwner, { loadingState ->
+            if (loadingState == true) {
+                binding.rvProgressBar.visibility = View.VISIBLE
+            } else {
+                binding.rvProgressBar.visibility = View.INVISIBLE
+            }
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,7 +51,7 @@ class UsersListFragment : Fragment() {
     }
 
     private fun setupFirebaseFirestore() {
-        showLoading()
+        viewModel.showLoading()
         val db = Firebase.firestore
         db.collection("users")
             .get()
@@ -55,7 +68,7 @@ class UsersListFragment : Fragment() {
                         }
                     }
                     showDatabaseData(users)
-                    hideLoading()
+                    viewModel.hideLoading()
                 }
             }
             .addOnFailureListener { exception ->
@@ -64,27 +77,7 @@ class UsersListFragment : Fragment() {
             }
     }
 
-    private fun showLoading() {
-        binding.rvProgressBar.visibility = View.VISIBLE
-    }
-
-    private fun hideLoading() {
-        binding.rvProgressBar.visibility = View.GONE
-    }
-
-//    private fun randomUrl(): String {
-//        val listOfUrl = listOf(
-//            "https://picsum.photos/130?random=$1.jpg",
-//            "https://picsum.photos/200?random=2.jpg",
-//            "https://picsum.photos/200?random=3.jpg",
-//            "https://picsum.photos/200?random=4.jpg",
-//            "https://picsum.photos/200?random=5.jpg",
-//            "https://picsum.photos/200?random=6.jpg",
-//            "https://picsum.photos/200?random=7.jpg",
-//            "https://picsum.photos/200?random=8.jpg"
-//        )
-//        return listOfUrl.random()
-//    }
+//    private
 
     private fun connectionFailureDialog() {
         val connectionFailureDialog = AlertDialog.Builder(requireContext())

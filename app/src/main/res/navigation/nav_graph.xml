@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/recyclerViewFragment"
-        android:name="com.example.meetup.presentation.UsersListFragment"
+        android:name="com.example.meetup.presentation.userlist.UsersListFragment"
         android:label="@string/users"
         tools:layout="@layout/fragment_userslist" >
         <action
