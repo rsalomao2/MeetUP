@@ -9,7 +9,7 @@ import com.example.meetup.R
 import com.example.meetup.model.FirestoreUser
 import kotlinx.android.synthetic.main.database_user_row.view.*
 
-class DatabaseAdapter(private val userList: ArrayList<FirestoreUser>,
+class DatabaseAdapter(private val userList: MutableList<FirestoreUser>,
                       private val onClickItem: (FirestoreUser) -> Unit
 ) :
     RecyclerView.Adapter<DatabaseAdapter.ViewHolder>() {
@@ -36,4 +36,9 @@ class DatabaseAdapter(private val userList: ArrayList<FirestoreUser>,
     }
 
     override fun getItemCount(): Int = userList.size
+
+    fun updateUsers(users: List<FirestoreUser>) {
+        userList.addAll(users)
+        notifyDataSetChanged()
+    }
 }
