@@ -1,4 +1,4 @@
-package com.example.meetup.adapter
+package com.example.meetup.presenter.adapter
 
 import android.view.LayoutInflater
 import android.view.View

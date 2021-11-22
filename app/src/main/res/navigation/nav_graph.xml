@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.meetup.presentation.SignInFragment"
+        android:name="com.example.meetup.presenter.signin.social.SignInFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/recyclerViewFragment"
-        android:name="com.example.meetup.presentation.userlist.UsersListFragment"
+        android:name="com.example.meetup.presenter.userlist.UsersListFragment"
         android:label="@string/users"
         tools:layout="@layout/fragment_userslist" >
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/userDetailFragment"
-        android:name="com.example.meetup.presentation.UserDetailFragment"
+        android:name="com.example.meetup.presenter.detail.UserDetailFragment"
         android:label="Users Detail"
         tools:layout="@layout/fragment_user_detail">
         <argument
@@ -42,12 +42,12 @@
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.example.meetup.presentation.SignUpFragment"
+        android:name="com.example.meetup.presenter.signup.SignUpFragment"
         android:label="SignUp"
         tools:layout="@layout/fragment_registration"/>
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="com.example.meetup.presentation.MapsFragment"
+        android:name="com.example.meetup.presenter.maps.MapsFragment"
         android:label="@string/maps"
         tools:layout="@layout/fragment_maps" >
         <argument
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/emailLoginFragment"
-        android:name="com.example.meetup.presentation.EmailLoginFragment"
+        android:name="com.example.meetup.presenter.signin.email.EmailLoginFragment"
         android:label="@string/signin"
         tools:layout="@layout/fragment_email_login" >
         <action
@@ -68,7 +68,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.meetup.presentation.SplashFragment"
+        android:name="com.example.meetup.presenter.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action

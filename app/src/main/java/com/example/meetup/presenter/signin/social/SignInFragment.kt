@@ -1,4 +1,4 @@
-package com.example.meetup.presentation
+package com.example.meetup.presenter.signin.social
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,8 @@ import android.view.*
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.example.meetup.R
 import com.example.meetup.databinding.FragmentLoginBinding
@@ -34,6 +36,7 @@ class SignInFragment : Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var mAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var viewModel: SignInViewModel
 
     companion object {
         const val GOOGLE_SIGN_IN = 1903
@@ -46,14 +49,40 @@ class SignInFragment : Fragment(R.layout.fragment_login) {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
+        val application = requireNotNull(this.activity).application
+        mAuth = Firebase.auth
+        val fbLoginManager = LoginManager.getInstance()
+        viewModel =
+            ViewModelProviders.of(this, SignInViewModelFactory(mAuth, fbLoginManager, application))
+                .get(SignInViewModel::class.java)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mAuth = Firebase.auth
-        mAuth.signOut()
         setupListeners()
+        setupObservers()
+    }
+
+    private fun setupObservers() {
+        setupAnonimouslySingInObserver()
+        setupFirebaseLoginTaskObserver()
+    }
+
+    private fun setupFirebaseLoginTaskObserver() {
+        viewModel.firebaseLoginTask.observe(viewLifecycleOwner) { task ->
+            if (task) {
+                navigateToHome()
+            }
+        }
+    }
+
+    private fun setupAnonimouslySingInObserver() {
+        viewModel.anonimouslyTask.observe(viewLifecycleOwner) { task ->
+            if (task) {
+                navigateToHome()
+            }
+        }
     }
 
     private fun setupLoginFacebook() {
@@ -63,14 +92,15 @@ class SignInFragment : Fragment(R.layout.fragment_login) {
             btnLoginFacebook.callOnClick()
         }
         btnLoginFacebook.setOnClickListener {
-            LoginManager.getInstance()
+            val instance = LoginManager.getInstance()
+            instance
                 .logInWithReadPermissions(this, listOf("public_profile", "email"))
             LoginManager.getInstance().registerCallback(callbackManager,
                 object : FacebookCallback<LoginResult> {
                     override fun onSuccess(loginResult: LoginResult) {
                         val token = loginResult.accessToken.token
                         val credential = FacebookAuthProvider.getCredential(token)
-                        signInOnFirebase(credential)
+                        viewModel.signInOnFirebase(credential)
                         Log.d("MainActivity", "Facebook token: " + loginResult.accessToken.token)
                     }
 
@@ -93,11 +123,10 @@ class SignInFragment : Fragment(R.layout.fragment_login) {
                 val account = task.getResult(ApiException::class.java)!!
                 val idToken = account.idToken
                 val credential = GoogleAuthProvider.getCredential(idToken, null)
-                signInOnFirebase(credential)
+                viewModel.signInOnFirebase(credential)
             } catch (e: ApiException) {
                 Toast.makeText(context, "onActivityResult Exception", Toast.LENGTH_SHORT).show()
                 Log.d("###", e.message.toString())
-                Log.d("###", e.toString())
             }
         }
     }
@@ -130,14 +159,14 @@ class SignInFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun setupSignUoButton() {
-        binding.signUpTextView.setOnClickListener{
+        binding.signUpTextView.setOnClickListener {
             findNavController().navigate(R.id.registrationFragment)
         }
     }
 
     private fun setupLoginAnounymously() {
         binding.loginAnonymously.setOnClickListener {
-            signInAnonymously()
+            viewModel.signInAnonymously()
         }
     }
 
@@ -163,29 +192,4 @@ class SignInFragment : Fragment(R.layout.fragment_login) {
         menu.findItem(R.id.menu_logout).setVisible(false)
         Log.d("###", "FUNCIONA KRO MENU")
     }
-
-    private fun signInAnonymously() {
-        mAuth.signInAnonymously()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    findNavController().graph.startDestination = R.id.recyclerViewFragment
-                    navigateToHome()
-                } else {
-                    Log.d("###", task.exception?.localizedMessage ?: "Error ao login anonnymously")
-                }
-            }
-    }
-
-    private fun signInOnFirebase(credential: AuthCredential) {
-        mAuth.signInWithCredential(credential)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    navigateToHome()
-                } else {
-                    Log.d("###", "signInWithCredential:failure", task.exception)
-                    requireContext().showToast("Login Failune\n${task.exception?.message.toString()}")
-                }
-            }
-    }
-
 }
