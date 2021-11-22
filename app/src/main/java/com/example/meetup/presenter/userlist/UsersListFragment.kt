@@ -1,4 +1,4 @@
-package com.example.meetup.presentation.userlist
+package com.example.meetup.presenter.userlist
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -12,7 +12,7 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.meetup.R
-import com.example.meetup.adapter.DatabaseAdapter
+import com.example.meetup.presenter.adapter.DatabaseAdapter
 import com.example.meetup.databinding.FragmentUserslistBinding
 import com.example.meetup.model.FirestoreUser
 

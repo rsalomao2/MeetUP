@@ -72,4 +72,5 @@
     <string name="hour_of_birth">Hour of Birth</string>
     <string name="connectionErrorDialogMsg">Cannot connect to the internet. Please check your internet connection</string>
     <string name="connectionErrorDialogTitle">Connection Failure</string>
+    <string name="testee">Field Cannot Be Empty</string>
 </resources>
