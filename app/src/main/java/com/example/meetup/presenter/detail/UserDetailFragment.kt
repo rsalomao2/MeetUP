@@ -1,4 +1,4 @@
-package com.example.meetup.presentation
+package com.example.meetup.presenter.detail
 
 import android.Manifest
 import android.app.Activity.RESULT_OK

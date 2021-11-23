@@ -1,4 +1,4 @@
-package com.example.meetup.presentation.userlist
+package com.example.meetup.presenter.userlist
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -13,8 +13,10 @@ class UsersListViewModel : ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
+
     private val _connectionFailureDialogLiveData = MutableLiveData<Boolean>()
     val connectionFailureDialogLiveData: LiveData<Boolean> get() = _connectionFailureDialogLiveData
+
     private val _userListLivedata = MutableLiveData<List<FirestoreUser>>()
     val userListLivedata: LiveData<List<FirestoreUser>> get() = _userListLivedata
 
@@ -45,4 +47,5 @@ class UsersListViewModel : ViewModel() {
                 _isLoading.value = false
             }
     }
+
 }
