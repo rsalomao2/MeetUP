@@ -12,6 +12,7 @@
 - [X] Aplicar mascaras CPF e Telefone
 - [X] Salvar dados no SharedPreference
 - [X] Mostrar toast de sucesso
+
     
 ### 3. Implementar Login
 - [X] Verificar se imput bate com algum registro do Banco
