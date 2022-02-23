@@ -1,6 +1,5 @@
-package com.example.meetup.presenter.splash
+package com.example.meetup.presentation.splash
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

@@ -1,10 +1,9 @@
-package com.example.meetup.presenter.signin.email
+package com.example.meetup.presentation.signin.email
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.meetup.R
 import com.google.firebase.auth.FirebaseAuth
 
 class EmailLoginViewModel : ViewModel() {

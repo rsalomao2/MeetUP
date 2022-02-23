@@ -1,4 +1,4 @@
-package com.example.meetup.presenter.signin.email
+package com.example.meetup.presentation.signin.email
 
 import android.os.Bundle
 import android.text.Editable

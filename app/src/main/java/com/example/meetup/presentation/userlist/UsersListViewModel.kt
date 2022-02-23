@@ -1,4 +1,4 @@
-package com.example.meetup.presenter.userlist
+package com.example.meetup.presentation.userlist
 
 import android.util.Log
 import androidx.lifecycle.LiveData

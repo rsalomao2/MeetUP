@@ -1,4 +1,4 @@
-package com.example.meetup.presenter.signin.social
+package com.example.meetup.presentation.signin.social
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,7 +12,6 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.example.meetup.R
 import com.example.meetup.databinding.FragmentLoginBinding
-import com.example.meetup.extensions.showToast
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -22,7 +21,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider

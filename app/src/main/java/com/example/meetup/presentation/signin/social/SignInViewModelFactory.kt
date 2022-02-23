@@ -1,4 +1,4 @@
-package com.example.meetup.presenter.signin.social
+package com.example.meetup.presentation.signin.social
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

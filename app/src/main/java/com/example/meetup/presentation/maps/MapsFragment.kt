@@ -1,4 +1,4 @@
-package com.example.meetup.presenter.maps
+package com.example.meetup.presentation.maps
 
 import androidx.fragment.app.Fragment
 

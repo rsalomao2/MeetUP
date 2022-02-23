@@ -1,4 +1,4 @@
-package com.example.meetup.presenter.signup
+package com.example.meetup.presentation.signup
 
 import android.content.Context
 import android.os.Bundle

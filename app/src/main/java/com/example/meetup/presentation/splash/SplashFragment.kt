@@ -1,4 +1,4 @@
-package com.example.meetup.presenter.splash
+package com.example.meetup.presentation.splash
 
 import android.os.Bundle
 import android.view.LayoutInflater

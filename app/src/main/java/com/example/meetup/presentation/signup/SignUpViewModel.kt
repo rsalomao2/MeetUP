@@ -1,10 +1,9 @@
-package com.example.meetup.presenter.signup
+package com.example.meetup.presentation.signup
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.meetup.R
 import com.example.meetup.util.CpfValidator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
